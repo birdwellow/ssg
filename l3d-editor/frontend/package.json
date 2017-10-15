@@ -1,13 +1,13 @@
 {
-  "name": "fastshell",
-  "title": "Fiercely quick and opinionated front-ends",
-  "author": "Hossein Karami",
-  "url": "https://HosseinKarami.github.io/fastshell",
-  "version": "1.0.5",
+  "name": "l3d-editor-frontend",
+  "title": "Frontend for the Live 3D Editor",
+  "author": "Florian Vogel",
+  "url": "https://github.com/birdwellow/ssg",
+  "version": "0.0.1",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "http://github.com/HosseinKarami/fastshell.git"
+    "url": "https://github.com/birdwellow/ssg.git"
   },
   "devDependencies": {
     "browser-sync": "^2.11.1",
@@ -27,10 +27,14 @@
   "gulpBuildIncludes": [
     "three/build/three.js",
     "three/examples/js/controls/OrbitControls.js",
-    "angular/angular.js"
+    "angular/angular.js",
+    "bootstrap/scss/bootstrap.scss"
   ],
   "dependencies": {
     "angular": "^1.6.6",
+    "bootstrap": "^4.0.0-beta",
+    "jquery": ">=3.0.0",
+    "popper.js": "^1.11.0",
     "three": "^0.87.1"
   }
 }

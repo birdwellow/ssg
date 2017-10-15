@@ -16,11 +16,21 @@ packageJson.gulpBuildIncludes.forEach(function (currentValue, index, array) {
 });
 
 var gulpSrc = packageJson.gulpBuildIncludes.concat([
-  'src/js/**/*.js'
+  'src/js/**/*.js',
+  'src/scss/style.scss'
 ]);
 
+
+/**
+ * JS Build
+ */
+
+var gulpJsSrc = gulpSrc.filter(function (currentValue) {
+  return currentValue.indexOf('.js') !== -1;
+});
+
 gulp.task('js',function(){
-  gulp.src(gulpSrc)
+  gulp.src(gulpJsSrc)
     // .pipe(jshint('.jshintrc'))
     // .pipe(jshint.reporter('default'))
     .pipe(concat('main.js'))
@@ -33,18 +43,38 @@ gulp.task('js',function(){
     .pipe(browserSync.reload({stream:true, once: true}));
 });
 
+
+/**
+ * SASS Build
+ */
+
+var gulpSassSrc = gulpSrc.filter(function (currentValue) {
+  return currentValue.indexOf('.scss') !== -1;
+});
+
+gulp.task('css', function () {
+  return gulp.src(gulpSassSrc)
+    .pipe(sass().on('error', sass.logError))
+    .pipe(concat('main.css'))
+    .pipe(gulp.dest('dist/css'))
+    .pipe(browserSync.reload({stream:true}));
+});
+
+
+/**
+ * HTML Build
+ */
+
 gulp.task('html',function(){
   gulp.src('src/**/*.html')
     .pipe(gulp.dest('dist/'))
     .pipe(browserSync.reload({stream:true, once: true}));
 });
 
-gulp.task('css', function () {
-  return gulp.src('src/scss/style.scss')
-    .pipe(sass().on('error', sass.logError))
-    .pipe(gulp.dest('dist/css'))
-    .pipe(browserSync.reload({stream:true}));
-});
+
+/**
+ * Live reload
+ */
 
 gulp.task('browser-sync', function() {
     browserSync.init(null, {
@@ -57,6 +87,11 @@ gulp.task('browser-sync', function() {
 gulp.task('bs-reload', function () {
     browserSync.reload();
 });
+
+
+/**
+ * Main tasks
+ */
 
 gulp.task('watch', ['dev', 'browser-sync'], function () {
   gulp.watch("src/scss/**/*.scss", ['css']);
