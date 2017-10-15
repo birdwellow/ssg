@@ -24,12 +24,12 @@ var L3DEditor = (function(L3DEditor) {
       {
         "type": "box",
         "dimensions": [60, 20, 15],
-        "position": [-20, 2.5, -10]
+        "position": [-20, 2, -10]
       },
       {
         "type": "box",
         "dimensions": [60, 20, 15],
-        "position": [-20, 2.5, 10]
+        "position": [-20, 2, 10]
       },
       {
         "type": "cylinder",

@@ -20,7 +20,7 @@
         var success = function(message) {
           $scope.success = message;
           $timeout(function () {
-            $scope.success = '';
+            // $scope.success = '';
           }, 5000);
         };
 

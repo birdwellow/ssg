@@ -16,7 +16,7 @@ var L3DEditor = (function(L3DEditor) {
       {
         "type": "box",
         "dimensions": [50, 5, 65],
-        "position": [-85, 2, 17.5]
+        "position": [-85, 2, 17]
       },
       {
         "type": "box",

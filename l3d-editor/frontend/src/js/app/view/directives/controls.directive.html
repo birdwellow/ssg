@@ -12,7 +12,9 @@
       ng-options="name for name in catalogDefinitionNames">
     </select>
     <input type="text" class="save" ng-model="saveCatalogDefinitionName"/>
-    <button ng-click="save()">Save</button>
+    <button class="glyphicon glyphicon-asterisk" ng-click="save()">
+      <span class="glyphicon-glyphicon-asterisk"></span>
+    </button>
     <button ng-click="newDefinition()">New</button>
 
   </div>

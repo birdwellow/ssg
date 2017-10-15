@@ -17,7 +17,7 @@ packageJson.gulpBuildIncludes.forEach(function (currentValue, index, array) {
 
 var gulpSrc = packageJson.gulpBuildIncludes.concat([
   'src/js/**/*.js',
-  'src/scss/style.scss'
+  'src/scss/index.scss'
 ]);
 
 
