@@ -7,9 +7,9 @@ body, html {
   width: 100%;
   height: 100%;
 
-  // Fixing a layout problem
+  // Fixes a layout problem
   canvas {
-    margin-bottom: -100px;
+    margin-bottom: -100px !important;
   }
 
   & > div {
@@ -26,11 +26,8 @@ body, html {
   }
 
   .modeller {
-    background: #dc3545;
-    color: #fff;
-
-    form {
-      padding-top: 60px;
+    & > * {
+      padding: 60px 10px 0 0 !important;
       height: 100vh;
       overflow: auto;
     }

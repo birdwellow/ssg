@@ -6,6 +6,12 @@ nav.navbar {
   button {
     margin-right: 5px !important;
   }
+
+  select {
+    background: #555 !important;
+    border: 1px solid #000;
+    color: #000 !important;
+  }
 }
 
 .notification {
@@ -13,10 +19,3 @@ nav.navbar {
 
 }
 
-
-.error {
-  color: #f88;
-}
-.success {
-  color: #8f8;
-}

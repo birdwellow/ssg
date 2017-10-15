@@ -1,0 +1,71 @@
+.modeller {
+  background: #000;
+  color: #fff;
+}
+
+.notification {
+  &.error {
+    color: #f88;
+  }
+  &.success {
+    color: #8f8;
+  }
+}
+
+.model-input {
+
+  // Composite -> green
+  &.composite {
+    border-color: #8f8;
+    background: #121;
+
+    select,
+    input[type=number]{
+      border-color: #8f8;
+    }
+  }
+
+  // Box -> blue
+  &.box {
+    border-color: #08f;
+    background: #012;
+
+    select,
+    input[type=number]{
+      border-color: #08f;
+    }
+  }
+
+  // Ref -> red
+  &.ref {
+    border-color: #f88;
+    background: #211;
+
+    select,
+    input[type=number]{
+      border-color: #f88;
+    }
+  }
+
+  // Cylinder -> orange
+  &.cylinder {
+    border-color: #fa0;
+    background: #210;
+
+    select,
+    input[type=number]{
+      border-color: #fa0;
+    }
+  }
+
+  // Extrude -> violet
+  &.extrude {
+    border-color: #f8f;
+    background: #212;
+
+    select,
+    input[type=number]{
+      border-color: #f8f;
+    }
+  }
+}

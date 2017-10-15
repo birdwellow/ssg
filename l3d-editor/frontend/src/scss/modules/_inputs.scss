@@ -1,0 +1,58 @@
+button {
+  cursor: pointer;
+}
+
+.model-input {
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 5px;
+  padding: 10px 10px 0 10px;
+
+  .model-input {
+    margin: 10px 0;
+  }
+
+  .remove {
+    float: right;
+  }
+
+  select,
+  input[type=number] {
+    border: 1px solid #fff;
+    background: rgba(0, 0, 0, 0.5);
+    color: #777;
+    padding: 5px;
+    border-radius: 5px;
+  }
+
+  .input label {
+    width: 150px;
+  }
+
+  input[type=number] {
+    background: none !important;
+    width: 80px;
+    margin-right: 10px;
+  }
+
+  .input.enum.type {
+    select {
+      font-size: 1.3em;
+    }
+  }
+
+  .input {
+    margin-bottom: 10px;
+  }
+
+  .add {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .restore {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+}

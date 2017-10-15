@@ -2,10 +2,10 @@
   <label ng-if="label">{{ label }}:</label>
   <div ng-repeat="(key, val) in array track by $index">
     <div class="element">
+      <button class="btn btn-outline-danger remove" ng-click="removeElement($index)">X</button>
       <array-input array="array[$index]"></array-input>
-      <button class="btn remove" ng-click="removeElement($index)">X</button>
     </div>
   </div>
   <div class="error" ng-if="error">{{ error }}</div>
-  <button class="btn add" ng-click="addElement()">+</button>
+  <button class="btn btn-outline-success add" ng-click="addElement()">+</button>
 </div>
