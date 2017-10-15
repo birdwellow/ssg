@@ -1,0 +1,10 @@
+<div class="input array" ng-show="array">
+  <label ng-if="label">{{ label }}:</label>
+  <div>
+    <input
+      keep-focus
+      type="number"
+      ng-model="array[$index]"
+      ng-repeat="(key, val) in array track by $index">
+  </div>
+</div>

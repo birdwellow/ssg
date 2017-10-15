@@ -1,0 +1,33 @@
+<div class="model {{ model.type }}">
+
+  <button class="button remove" ng-click="remove(model)">X</button>
+  <enum-input class="type" model="model" field="type" enum-values="typeNames"></enum-input>
+  <enum-input class="name" model="model" field="name" enum-values="refNames"></enum-input>
+
+  <simple-input value="model.height" label="height"></simple-input>
+  <simple-input value="model.width" label="width"></simple-input>
+  <array-input array="model.radii" label="radii"></array-input>
+  <array-input array="model.dimensions" label="dimensions"></array-input>
+  <array-input array="model.position" label="position"></array-input>
+  <array-input array="model.rotation" label="rotation"></array-input>
+  <two-dim-array-input array="model.points" label="points" minimal-length="3"></two-dim-array-input>
+
+  <object-input object="model.repeat" label="repeat"></object-input>
+
+  <model-input
+    ng-if="model.parts"
+    ng-repeat="(key, part) in model.parts track by $index"
+    model="part">
+  </model-input>
+
+  <button
+    class="button restore"
+    ng-if="model._parts"
+    ng-click="restore()">Restore</button>
+
+  <button
+    class="button add"
+    ng-if="model.parts"
+    ng-click="addPart()">+</button>
+
+</div>
