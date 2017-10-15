@@ -1,24 +1,39 @@
-.editor {
-  width: 100%;
-  height: 100vh;
-  display: table;
+body, html {
+  height: 100%;
+}
 
-  .controls {
-    width: 100%;
+.editor {
+  display: table;
+  width: 100%;
+  height: 100%;
+
+  // Fixing a layout problem
+  canvas {
+    margin-bottom: -100px;
+  }
+
+  & > div {
+    display: table-row;
+
+    & > div {
+      display: table-cell;
+      vertical-align: top;
+    }
   }
 
   .preview {
     width: 70%;
-    height: 100%;
   }
 
-}
+  .modeller {
+    background: #dc3545;
+    color: #fff;
 
-.row {
-  display: table-row;
-}
+    form {
+      padding-top: 60px;
+      height: 100vh;
+      overflow: auto;
+    }
+  }
 
-.cell {
-  vertical-align: top;
-  display: table-cell;
 }

@@ -1,8 +1,22 @@
-.controls > div {
-  padding: 5px;
+nav.navbar {
+  color: #fff;
+
+  select,
+  input,
+  button {
+    margin-right: 5px !important;
+  }
 }
 
 .notification {
-  float: right;
-  margin: 0;
+  padding: 0 20px;
+
+}
+
+
+.error {
+  color: #f88;
+}
+.success {
+  color: #8f8;
 }

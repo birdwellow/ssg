@@ -7,7 +7,7 @@
 
     return {
       restrict: 'E',
-      templateUrl: 'js/app/view/directives/preview.directive.html',
+      templateUrl: 'js/app/view/directives/components/preview.directive.html',
       replace: true,
       scope: {
         definition: '='

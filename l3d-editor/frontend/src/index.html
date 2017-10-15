@@ -13,7 +13,23 @@
 
     <script src="js/main.js"></script>
   </head>
-  <body>
-    <editor></editor>
-  </body>
-</html>
+  <body ng-controller="EditorController">
+      <controlbar></controlbar>
+      <!--<div class="table" style="width: 100%; height: 100%; ">-->
+        <!--<div class="row">-->
+          <!--<preview class="cell" definition="definition"></preview>-->
+          <!--<div class="cell">-->
+            <!--<form class="modeller">-->
+              <!--<model-input model="definition"></model-input>-->
+            <!--</form>-->
+          <!--</div>-->
+        <!--</div>-->
+      <!--</div>-->
+
+      <div class="editor">
+        <div>
+          <preview definition="definition"></preview>
+          <modeller></modeller>
+        </div>
+    </body>
+  </html>
