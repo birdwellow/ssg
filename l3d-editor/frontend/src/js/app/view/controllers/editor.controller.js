@@ -3,7 +3,13 @@
   'use strict';
 
 
-  angular.module('Editor').controller('EditorController', function ($scope, $timeout) {
+  angular.module('Editor').controller('EditorController', function ($scope, $timeout, PersistenceService) {
+
+    PersistenceService.getAllDefinitions().then(function(definitionMap) {
+      console.log(definitionMap);
+    }, function(error) {
+      console.error(error);
+    });
 
     $scope.config = L3DEditor.Config;
 

@@ -7,7 +7,7 @@ var gulp = require('gulp'),
     rename = require('gulp-rename'),
     concat = require('gulp-concat');
 
-
+var targetDir = 'dist/static/';
 var packageJson = require('./package.json');
 
 packageJson.gulpBuildIncludes.forEach(function (currentValue, index, array) {
@@ -34,7 +34,7 @@ gulp.task('js',function(){
     // .pipe(jshint('.jshintrc'))
     // .pipe(jshint.reporter('default'))
     .pipe(concat('main.js'))
-    .pipe(gulp.dest('dist/js'))
+    .pipe(gulp.dest(targetDir + 'js'))
     .on('error', function (err) {
       gutil.log(gutil.colors.red('[Error]'),
         err.toString()
@@ -56,7 +56,7 @@ gulp.task('css', function () {
   return gulp.src(gulpSassSrc)
     .pipe(sass().on('error', sass.logError))
     .pipe(concat('main.css'))
-    .pipe(gulp.dest('dist/css'))
+    .pipe(gulp.dest(targetDir + 'css'))
     .pipe(browserSync.reload({stream:true}));
 });
 
@@ -67,7 +67,7 @@ gulp.task('css', function () {
 
 gulp.task('html',function(){
   gulp.src('src/**/*.html')
-    .pipe(gulp.dest('dist/'))
+    .pipe(gulp.dest(targetDir))
     .pipe(browserSync.reload({stream:true, once: true}));
 });
 
@@ -79,7 +79,7 @@ gulp.task('html',function(){
 gulp.task('browser-sync', function() {
     browserSync.init(null, {
         server: {
-            baseDir: "dist"
+            baseDir: targetDir
         }
     });
 });
@@ -97,7 +97,7 @@ gulp.task('watch', ['dev', 'browser-sync'], function () {
   gulp.watch("src/scss/**/*.scss", ['css']);
   gulp.watch("src/js/**/*.js", ['js']);
   gulp.watch("src/**/*.html", ['html']);
-  gulp.watch("dist/*.html", ['bs-reload']);
+  gulp.watch(targetDir + "*.html", ['bs-reload']);
 });
 
 gulp.task('dev', ['html', 'css', 'js']);

@@ -22,7 +22,7 @@
 
   <button
     class="btn btn-outline-info restore"
-    ng-if="model._parts"
+    ng-if="model._parts && model._parts.length > 0"
     ng-click="restore()">Restore</button>
 
   <button
