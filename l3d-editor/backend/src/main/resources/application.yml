@@ -2,14 +2,3 @@
 server:
   contextPath:
   port: 8880
-
-# JACKSON
-spring:
-  jackson:
-    serialization:
-      INDENT_OUTPUT: true
-
-#logging:
-#  level:
-#    org.springframework:
-#      security: DEBUG
