@@ -1,0 +1,12 @@
+# config context path to "/" by setting an empty string
+server:
+  contextPath:
+  port: 8880
+
+spring:
+  jpa.hibernate.ddl-auto: create
+  datasource:
+    url: jdbc:mysql://localhost:3306/l3deditor
+    username: private
+    password: abcd
+    driver-class-name: com.mysql.jdbc.Driver
