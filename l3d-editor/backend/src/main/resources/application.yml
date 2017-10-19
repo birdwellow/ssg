@@ -1,4 +1,0 @@
-# config context path to "/" by setting an empty string
-server:
-  contextPath:
-  port: 8880
