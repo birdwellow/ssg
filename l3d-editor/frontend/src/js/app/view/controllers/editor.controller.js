@@ -5,8 +5,10 @@
 
   angular.module('Editor').controller('EditorController', function ($scope, $timeout, PersistenceService) {
 
-    PersistenceService.getAllDefinitions().then(function(definitionMap) {
-      console.log(definitionMap);
+    PersistenceService.getAllDefinitions()
+      .then(function(definitionMap) {
+        L3DEditor.Catalog.setDefinitions(definitionMap);
+        update();
     }, function(error) {
       console.error(error);
     });
@@ -15,12 +17,15 @@
 
     var error = function(message, exceptionText) {
       $scope.error = message + (exceptionText ? ': ' +exceptionText : '');
+      $timeout(function () {
+        $scope.error = '';
+      }, 10000);
     };
 
     var success = function(message) {
       $scope.success = message;
       $timeout(function () {
-        // $scope.success = '';
+        $scope.success = '';
       }, 5000);
     };
 
@@ -31,20 +36,25 @@
     };
 
     $scope.load = function (catalogDefinitionName) {
-      $scope.definition = L3DEditor.Catalog.get(catalogDefinitionName);
+      if (catalogDefinitionName) {
+        $scope.definition = L3DEditor.Catalog.get(catalogDefinitionName);
+      }
     };
 
     $scope.save = function () {
-      try {
-        if(!$scope.saveCatalogDefinitionName) {
-          throw '"' + $scope.saveCatalogDefinitionName + '" is not a valid name';
-        }
-        L3DEditor.Catalog.save($scope.saveCatalogDefinitionName, $scope.definition);
-        update();
-        success('Successfully saved!');
-      } catch (e) {
-        error('An error occurred', e);
+      if (!$scope.definition) {
+        return;
       }
+      if(!$scope.saveCatalogDefinitionName) {
+        error('"' + $scope.saveCatalogDefinitionName + '" is not a valid name');
+      }
+      PersistenceService.saveDefinition($scope.saveCatalogDefinitionName, $scope.definition)
+        .then(function () {
+          update();
+          success('Successfully saved!');
+        }, function () {
+          error('An error occurred', e);
+        });
     };
 
     var update = function () {
@@ -60,7 +70,9 @@
     });
 
     $scope.$watch('definition', function () {
-      L3DEditor.DefinitionService.sanitize($scope.definition);
+      if($scope.definition) {
+        L3DEditor.DefinitionService.sanitize($scope.definition);
+      }
     }, true);
 
   });

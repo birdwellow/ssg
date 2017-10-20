@@ -14,6 +14,7 @@
       },
       link: function (scope, element) {
 
+        
         var room;
         var nativeElement = angular.element(element)[0];
 

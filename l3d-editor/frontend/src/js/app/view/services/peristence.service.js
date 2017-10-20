@@ -11,7 +11,11 @@
 
       var getAllDefinitions = function () {
         return $http.get(baseUrl + 'definitions').then(function (response) {
-          return response.data;
+          var definitions = response.data;
+          for (var key in definitions) {
+            definitions[key] = JSON.parse(definitions[key]);
+          }
+          return definitions;
         }, function (error) {
           // TODO: Error handling
           console.error(error);
