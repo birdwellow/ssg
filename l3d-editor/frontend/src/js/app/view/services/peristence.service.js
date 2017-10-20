@@ -7,8 +7,10 @@
     .module('Editor')
     .service('PersistenceService', function ($http) {
 
+      var baseUrl = 'http://localhost:8880/';
+
       var getAllDefinitions = function () {
-        return $http.get('/definitions').then(function (response) {
+        return $http.get(baseUrl + 'definitions').then(function (response) {
           return response.data;
         }, function (error) {
           // TODO: Error handling
@@ -17,7 +19,7 @@
       };
 
       var getDefinition = function (name) {
-        return $http.get('/definitions/' + name).then(function (response) {
+        return $http.get(baseUrl + '/definitions/' + name).then(function (response) {
           return response.data;
         }, function (error) {
           // TODO: Error handling
@@ -37,7 +39,7 @@
           name: name,
           json: JSON.stringify(definition)
         };
-        return $http.post('/definitions', definitionPayload).then(function (response) {
+        return $http.post(baseUrl + '/definitions', definitionPayload).then(function (response) {
           return response.data;
         }, function (error) {
           // TODO: Error handling
