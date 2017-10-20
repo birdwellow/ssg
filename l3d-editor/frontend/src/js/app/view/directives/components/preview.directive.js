@@ -14,11 +14,16 @@
       },
       link: function (scope, element) {
 
+        var room;
         var nativeElement = angular.element(element)[0];
-        var room = new L3DEditor.Room(nativeElement, scope.definition);
 
         scope.$watch('definition', function () {
-          room.update(scope.definition);
+          if (!room && scope.definition) {
+            room = new L3DEditor.Room(nativeElement, scope.definition);
+          }
+          if (scope.definition) {
+            room.update(scope.definition);
+          }
         }, true);
       }
     };
