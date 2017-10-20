@@ -51,8 +51,9 @@ L3DEditor = (function (L3DEditor) {
       throw 'No template with name "' + definitionName + '" defined';
     }
     definitionTemplate = L3DEditor.ObjectUtils.copyObject(definitionTemplate);
+    definitionTemplate.type = definitionName;
     var masterTemplate = getMasterTemplate();
-    L3DEditor.ObjectUtils.copyObjectFields(masterTemplate, definitionTemplate);
+    L3DEditor.ObjectUtils.copyObjectFields(masterTemplate, definitionTemplate, ['type']);
     return definitionTemplate;
   };
 
