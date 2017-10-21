@@ -6,7 +6,7 @@ L3DEditor = (function (THREE, L3DEditor) {
   var factories = {
 
     "box": function (definition) {
-      return new THREE.BoxGeometry(
+      return new THREE.BoxBufferGeometry(
         definition.dimensions[0],
         definition.dimensions[1],
         definition.dimensions[2]
@@ -14,7 +14,7 @@ L3DEditor = (function (THREE, L3DEditor) {
     },
 
     "cylinder": function (definition) {
-      return new THREE.CylinderGeometry(
+      return new THREE.CylinderBufferGeometry(
         definition.radii[0],
         definition.radii[1],
         definition.height,
@@ -42,7 +42,7 @@ L3DEditor = (function (THREE, L3DEditor) {
         bevelSegments: definition.bevelSegments || 1
       };
 
-      return new THREE.ExtrudeGeometry(shape, extrudeSettings);
+      return new THREE.ExtrudeBufferGeometry(shape, extrudeSettings);
     }
 
   };
@@ -50,7 +50,7 @@ L3DEditor = (function (THREE, L3DEditor) {
   L3DEditor.GeometryFactory = {
 
     createCenter: function (definition) {
-      return new THREE.BoxGeometry(0, 0, 0);
+      return new THREE.BoxBufferGeometry(0, 0, 0);
     },
 
     createFromDefinition: function (definition) {
