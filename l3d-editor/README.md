@@ -11,7 +11,6 @@
 
 ### Open Issues
 * Make default values of 'extrude' geometry editable
-* Use ng-template-build step
 * Add further Three.js geometries
 * Make material editable
 * Highlight part on mouse over
