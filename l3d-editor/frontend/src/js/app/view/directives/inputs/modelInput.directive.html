@@ -10,6 +10,13 @@
   <array-input array="model.dimensions" label="dimensions"></array-input>
   <array-input array="model.position" label="position"></array-input>
   <array-input array="model.rotation" label="rotation"></array-input>
+  <simple-input value="model.roundness" label="roundness"></simple-input>
+  <boolean-input value="model.bevelEnabled" label="bevel enabled"></boolean-input>
+  <span ng-if="model.bevelEnabled">
+    <simple-input value="model.bevelThickness" label="bevel thickness"></simple-input>
+    <simple-input value="model.bevelSize" label="bevel size"></simple-input>
+    <simple-input value="model.bevelSegments" label="bevel segments"></simple-input>
+  </span>
   <two-dim-array-input array="model.points" label="points" minimal-length="3"></two-dim-array-input>
 
   <object-input object="model.repeat" label="repeat"></object-input>

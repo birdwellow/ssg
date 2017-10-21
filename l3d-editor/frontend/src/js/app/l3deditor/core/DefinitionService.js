@@ -30,7 +30,12 @@ L3DEditor = (function (L3DEditor) {
         [30, 15],
         [-45, 15]
       ],
-      "width": 44
+      "width": 44,
+      "roundness": 20,
+      "bevelEnabled": true,
+      "bevelThickness": 1,
+      "bevelSize": 1,
+      "bevelSegments": 1
     },
     "composite": {
       "parts": [],
