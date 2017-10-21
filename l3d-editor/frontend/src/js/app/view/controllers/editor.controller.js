@@ -5,25 +5,20 @@
 
   angular.module('Editor').controller('EditorController', function ($scope, $timeout, PersistenceService) {
 
-    PersistenceService.getAllDefinitions()
-      .then(function(definitionMap) {
-        L3DEditor.Catalog.setDefinitions(definitionMap);
-        update();
-    }, function(error) {
-      console.error(error);
-    });
-
     $scope.config = L3DEditor.Config;
 
     var error = function(message, exceptionText) {
       $scope.error = message + (exceptionText ? ': ' +exceptionText : '');
-      $timeout(function () {
-        $scope.error = '';
-      }, 10000);
+      $scope.success = '';
+    };
+
+    $scope.hideError = function () {
+      $scope.error = '';
     };
 
     var success = function(message) {
       $scope.success = message;
+      $scope.error = '';
       $timeout(function () {
         $scope.success = '';
       }, 5000);
@@ -36,13 +31,18 @@
     };
 
     $scope.load = function (catalogDefinitionName) {
-      if (catalogDefinitionName) {
-        $scope.definition = L3DEditor.Catalog.get(catalogDefinitionName);
+      if (!catalogDefinitionName) {
+        return;
       }
+      $scope.definition = L3DEditor.Catalog.get(catalogDefinitionName);
     };
 
     $scope.save = function () {
       if (!$scope.definition) {
+        return;
+      }
+      if (!$scope.saveCatalogDefinitionName || $scope.saveCatalogDefinitionName.length < 6) {
+        error('Enter a valid definition name (longer than 6 characters)');
         return;
       }
       if(!$scope.saveCatalogDefinitionName) {
@@ -58,22 +58,38 @@
     };
 
     var update = function () {
-      $scope.catalogDefinitionNames = L3DEditor.Catalog.getNames();
-      $scope.catalogDefinitionName = $scope.catalogDefinitionName || $scope.catalogDefinitionNames[0];
+      PersistenceService.getAllDefinitions()
+        .then(function(definitionMap) {
+          L3DEditor.Catalog.setDefinitions(definitionMap);
+          $scope.catalogDefinitionNames = L3DEditor.Catalog.getNames();
+          $scope.catalogDefinitionName = $scope.catalogDefinitionName || $scope.catalogDefinitionNames[0];
+        }, function(error) {
+          error('An error occurred (' + error + ')');
+        });
     };
-    update();
 
+
+    // Sanitize the definition on changes
 
     $scope.$watch('catalogDefinitionName', function () {
       $scope.load($scope.catalogDefinitionName);
       $scope.saveCatalogDefinitionName = $scope.catalogDefinitionName;
     });
 
+
+    // Sanitize the definition on changes
+
     $scope.$watch('definition', function () {
       if($scope.definition) {
         L3DEditor.DefinitionService.sanitize($scope.definition);
       }
     }, true);
+
+
+
+    // Bootstrap the whole party
+
+    update();
 
   });
 

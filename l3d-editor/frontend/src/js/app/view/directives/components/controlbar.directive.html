@@ -9,7 +9,10 @@
     <label for="isRotationActive">Rotation</label>
   </form>
   <form class="form-inline mt-2 mt-md-0">
-    <div ng-if="error" class="notification error">{{ error }}</div>
+    <div ng-if="error" class="notification error">
+      {{ error }}
+      <button class="btn btn-danger remove" ng-click="hideError()">Ok</button>
+    </div>
     <div ng-if="success" class="notification success">{{ success }}</div>
 
     <select

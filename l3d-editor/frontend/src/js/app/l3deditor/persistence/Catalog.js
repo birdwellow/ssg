@@ -7,10 +7,6 @@ var L3DEditor = (function(L3DEditor) {
   var Catalog = L3DEditor.Catalog || {};
   var definitions = {};
 
-  Catalog.save = function (name, object) {
-
-  };
-
   Catalog.get = function(name) {
     if (!name) {
       throw "Catalog: " + name + " is not a valid definition name";

@@ -11,31 +11,26 @@
 
       var getAllDefinitions = function () {
         return $http.get(baseUrl + 'definitions').then(function (response) {
-          var definitions = response.data;
-          for (var key in definitions) {
-            definitions[key] = JSON.parse(definitions[key]);
+          var definitions = {};
+          for (var key in response.data) {
+            var definition = response.data[key];
+            try {
+              definitions[key] = JSON.parse(definition);
+            } catch (e) {
+              console.error('Error while parsing fetched definition: ' + definition);
+              console.error(e);
+            }
           }
           return definitions;
         }, function (error) {
-          // TODO: Error handling
           console.error(error);
         });
-      };
-
-      var getDefinition = function (name) {
-        return $http.get(baseUrl + '/definitions/' + name).then(function (response) {
-          return response.data;
-        }, function (error) {
-          // TODO: Error handling
-          console.error(error);
-        });
-
       };
 
       var getDefinitionNames = function () {
         return getAllDefinitions().then(function (definitionsMap) {
           return Object.keys(definitionsMap);
-        })
+        });
       };
 
       var saveDefinition = function (name, definition) {
@@ -46,14 +41,12 @@
         return $http.post(baseUrl + '/definitions', definitionPayload).then(function (response) {
           return response.data;
         }, function (error) {
-          // TODO: Error handling
           console.error(error);
         });
       };
 
     return {
       getAllDefinitions: getAllDefinitions,
-      getDefinition: getDefinition,
       getDefinitionNames: getDefinitionNames,
       saveDefinition: saveDefinition
     };

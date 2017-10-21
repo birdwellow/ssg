@@ -14,15 +14,18 @@
       },
       link: function (scope, element) {
 
-        
         var room;
         var nativeElement = angular.element(element)[0];
 
-        scope.$watch('definition', function () {
-          if (!room && scope.definition) {
-            room = new L3DEditor.Room(nativeElement, scope.definition);
+        var initialize = function (definition) {
+          if (!room) {
+            room = new L3DEditor.Room(nativeElement, definition);
           }
+        };
+
+        scope.$watch('definition', function () {
           if (scope.definition) {
+            initialize(scope.definition);
             room.update(scope.definition);
           }
         }, true);
