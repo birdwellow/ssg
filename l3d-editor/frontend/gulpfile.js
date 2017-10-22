@@ -34,6 +34,12 @@ gulp.task('html', function(){
     .pipe(browserSync.reload({stream:true, once: true}));
 });
 
+gulp.task('html:dev', function(){
+  return gulp.src('src/**/*.html')
+    .pipe(gulp.dest(targetDir))
+    .pipe(browserSync.reload({stream:true, once: true}));
+});
+
 gulp.task('html-templates', function(){
   return gulp.src('src/js/**/*.html')
     .pipe(minifyHtml({empty: true, quotes: true}))
@@ -72,6 +78,12 @@ gulp.task('js-sources',function(){
 
 gulp.task('js', ['js-sources', 'html-templates'], function(){
   gulp.src(targetDir + 'tmp/**/*.js')
+    .pipe(concat('main.js'))
+    .pipe(gulp.dest(targetDir + 'js'));
+});
+
+gulp.task('js:dev', ['js-sources'], function(){
+  gulp.src(targetDir + 'tmp/app.js')
     .pipe(concat('main.js'))
     .pipe(gulp.dest(targetDir + 'js'));
 });
@@ -131,6 +143,8 @@ gulp.task('watch', ['dev', 'browser-sync'], function () {
   gulp.watch(targetDir + "**/*", ['bs-reload']);
 });
 
-gulp.task('dev', ['html', 'css', 'js']);
+gulp.task('prod', ['html', 'css', 'js']);
+
+gulp.task('dev', ['html:dev', 'css', 'js:dev']);
 
 gulp.task('default', ['dev']);
