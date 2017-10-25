@@ -26,8 +26,8 @@ L3DEditor = (function (THREE, L3DEditor) {
     rotate(mesh, definition.rotation);
   };
 
-  var createMesh = function (geometry, definition) {
-    var material = new THREE.MeshPhongMaterial();
+  var createMesh = function (geometry, material, definition) {
+    // var material = new THREE.MeshPhongMaterial();
     var mesh = new THREE.Mesh(geometry, material);
     positionAndAdjustMesh(mesh, definition);
     return mesh;
@@ -35,7 +35,8 @@ L3DEditor = (function (THREE, L3DEditor) {
 
   var createMeshByType = function (definition) {
     var geometry = L3DEditor.GeometryFactory.createFromDefinition(definition);
-    var mesh = createMesh(geometry, definition);
+    var material = L3DEditor.MaterialFactory.createFromDefinition(definition);
+    var mesh = createMesh(geometry, material, definition);
     return mesh;
   };
 

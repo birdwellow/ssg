@@ -10,7 +10,7 @@
       templateUrl: 'js/app/view/directives/inputs/enumInput.directive.html',
       replace: true,
       scope: {
-        label: '=',
+        label: '@',
         model: '=',
         field: '@',
         enumValues: '='

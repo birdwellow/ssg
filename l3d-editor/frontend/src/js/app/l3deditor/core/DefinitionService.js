@@ -11,6 +11,10 @@ L3DEditor = (function (L3DEditor) {
       "position": [0, 0, 0],
       "rotation": [0, 0, 0]
     },
+    "material": {
+      "enabled": false,
+      "type": "phong"
+    },
     "_dustbin": {}
   };
 
@@ -46,8 +50,18 @@ L3DEditor = (function (L3DEditor) {
     }
   };
 
+  var materials = [
+    "phong",
+    "lambert",
+    "standard"
+  ];
+
   var getDefinitionTemplateNames = function () {
     return Object.keys(definitionTemplates);
+  };
+
+  var getMaterialNames = function () {
+    return materials;
   };
 
   var getDefinitionTemplate = function (definitionName) {
@@ -262,6 +276,7 @@ L3DEditor = (function (L3DEditor) {
 
   L3DEditor.DefinitionService = {
     compile: copyAndCompile,
+    getMaterialNames: getMaterialNames,
     getDefinitionTemplateNames: getDefinitionTemplateNames,
     getDefinitionTemplate: getDefinitionTemplate,
     backupPart: backupPart,
