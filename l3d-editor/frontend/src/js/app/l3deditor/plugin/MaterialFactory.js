@@ -22,7 +22,7 @@ L3DEditor = (function (THREE, L3DEditor) {
   L3DEditor.MaterialFactory = {
 
     createFromDefinition: function (definition) {
-      if (definition && definition.isMouseOver) {
+      if (definition && definition.isMouseOver && L3DEditor.Config.isMarkOnMouseOver) {
         return new THREE.MeshBasicMaterial({
           color: "red"
         });

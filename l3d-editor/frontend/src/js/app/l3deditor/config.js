@@ -1,7 +1,8 @@
 L3DEditor = (function (L3DEditor) {
 
   L3DEditor.Config = {
-    isRotationActive: false
+    isRotationActive: false,
+    isMarkOnMouseOver: false
   };
 
   L3DEditor.Config.defaultDefinition = {
