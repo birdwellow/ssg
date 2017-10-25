@@ -1,4 +1,4 @@
-<div class="model-input {{ model.type }}" ng-show="model">
+<div class="model-input {{ model.type }}" ng-show="model" ng-mouseover="mouseOver($event)" ng-mouseleave="mouseOut($event)">
 
   <button class="btn btn-danger remove" ng-click="remove(model)">X</button>
   <enum-input class="type" model="model" field="type" enum-values="typeNames"></enum-input>

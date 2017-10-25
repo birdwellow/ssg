@@ -15,7 +15,8 @@ L3DEditor = (function (L3DEditor) {
       "enabled": false,
       "type": "phong"
     },
-    "_dustbin": {}
+    "_dustbin": {},
+    "isMouseOver": false
   };
 
   var definitionTemplates = {

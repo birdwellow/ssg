@@ -22,12 +22,18 @@ L3DEditor = (function (THREE, L3DEditor) {
   L3DEditor.MaterialFactory = {
 
     createFromDefinition: function (definition) {
+      if (definition && definition.isMouseOver) {
+        return new THREE.MeshBasicMaterial({
+          color: "red"
+        });
+      }
       var material = 'phong';
       if (definition && definition.material && definition.material.type) {
         material = definition.material.type;
       }
       var factory = factories[material];
-      return factory(definition);
+      var material = factory(definition);
+      return material;
     }
 
   };

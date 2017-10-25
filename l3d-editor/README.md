@@ -24,4 +24,3 @@
     * MeshPhongMaterial
     * MeshPhysicalMaterial
     * MeshStandardMaterial
-* Highlight part on mouse over

@@ -43,6 +43,16 @@
           L3DEditor.DefinitionService.restoreLastPart($scope.model);
         };
 
+        $scope.mouseOver = function ($event) {
+          $event.stopPropagation();
+          $scope.model.isMouseOver = true;
+        };
+
+        $scope.mouseOut = function ($event) {
+          $event.stopPropagation();
+          $scope.model.isMouseOver = false;
+        };
+
       }
     };
 
