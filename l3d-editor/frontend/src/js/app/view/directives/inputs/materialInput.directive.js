@@ -5,14 +5,14 @@
 
   var materialNames = L3DEditor.DefinitionService.getMaterialNames();
 
-  angular.module('Editor').directive('optionalObjectInput', function () {
+  angular.module('Editor').directive('materialInput', function () {
 
     return {
       restrict: 'E',
-      templateUrl: 'js/app/view/directives/inputs/optionalObjectInput.directive.html',
+      templateUrl: 'js/app/view/directives/inputs/materialInput.directive.html',
       replace: true,
       scope: {
-        object: '=',
+        material: '=',
         label: '@'
       },
       controller: function ($scope) {

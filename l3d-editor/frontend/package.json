@@ -32,7 +32,9 @@
     "three/build/three.js",
     "three/examples/js/controls/OrbitControls.js",
     "angular/angular.js",
-    "bootstrap/scss/bootstrap.scss"
+    "bootstrap/scss/bootstrap.scss",
+    "font-awesome/scss/font-awesome.scss",
+    "font-awesome/fonts/**/*"
   ],
   "dependencies": {
     "angular": "^1.6.6",

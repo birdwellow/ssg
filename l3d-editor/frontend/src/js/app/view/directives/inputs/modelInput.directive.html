@@ -17,10 +17,11 @@
     <simple-input value="model.bevelSize" label="bevel size"></simple-input>
     <simple-input value="model.bevelSegments" label="bevel segments"></simple-input>
   </span>
-  <optional-object-input object="model.material" label="material"></optional-object-input>
   <two-dim-array-input array="model.points" label="points" minimal-length="3"></two-dim-array-input>
 
   <object-input object="model.repeat" label="repeat"></object-input>
+
+  <material-input material="model.material" label="material"></material-input>
 
   <model-input
     ng-if="model.parts"

@@ -55,6 +55,22 @@ gulp.task('html-templates', function(){
 
 
 /**
+ * Assets Build
+ */
+
+var gulpFontsSrc = gulpSrc.filter(function (currentValue) {
+  return currentValue.indexOf('font') !== -1;
+});
+
+gulp.task('fonts',function(){
+  return gulp.src(gulpFontsSrc)
+    .pipe(gulp.dest(targetDir + 'fonts'))
+  // .pipe(browserSync.reload({stream:true, once: true}));
+});
+
+gulp.task('assets', ['fonts']);
+
+/**
  * JS Build
  */
 
@@ -64,8 +80,8 @@ var gulpJsSrc = gulpSrc.filter(function (currentValue) {
 
 gulp.task('js-sources',function(){
   return gulp.src(gulpJsSrc)
-    // .pipe(jshint('.jshintrc'))
-    // .pipe(jshint.reporter('default'))
+  // .pipe(jshint('.jshintrc'))
+  // .pipe(jshint.reporter('default'))
     .pipe(concat('app.js'))
     .pipe(gulp.dest(targetDir + 'tmp'))
     .on('error', function (err) {
@@ -110,7 +126,7 @@ gulp.task('css', function () {
  * Clean
  */
 gulp.task('clean', function() {
-  gulp.src('dist/**', {read: false})
+  gulp.src('dist/*', {read: false})
     .pipe(clean());
 });
 
@@ -143,8 +159,8 @@ gulp.task('watch', ['dev', 'browser-sync'], function () {
   gulp.watch(targetDir + "**/*", ['bs-reload']);
 });
 
-gulp.task('prod', ['html', 'css', 'js']);
+gulp.task('prod', ['html', 'assets', 'css', 'js']);
 
-gulp.task('dev', ['html:dev', 'css', 'js:dev']);
+gulp.task('dev', ['html:dev', 'assets', 'css', 'js:dev']);
 
 gulp.task('default', ['dev']);
