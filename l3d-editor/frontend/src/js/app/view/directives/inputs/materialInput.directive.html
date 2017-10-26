@@ -1,15 +1,9 @@
-<div class="input object">
-  <div class="header">
+<div class="input material" ng-class="{'enabled': material.enabled}">
+  <div class="header" ng-click="toggleMaterial()">
+    <div class="fa" ng-class="{'fa-angle-down': !material.enabled, 'fa-angle-up': material.enabled}"></div>
     Material
-    <div class="fa fa-angle-down pull-right"></div>
-    <!--<div class="fa fa-caret-down pull-right"></div>-->
   </div>
-  <!--<boolean-input value="material.enabled" label="material"></boolean-input>-->
-
-  <span ng-show="material.enabled">
+  <div class="content" ng-show="material.enabled">
     <enum-input model="material" field="type" enum-values="materialNames" label="type"></enum-input>
-    <!--<simple-input value="object.times" label="repeat-times"></simple-input>-->
-    <!--<array-input array="object.position" label="repeat-position"></array-input>-->
-    <!--<array-input array="object.rotation" label="repeat-rotation"></array-input>-->
-  </span>
+  </div>
 </div>

@@ -19,6 +19,10 @@
 
         $scope.materialNames = materialNames;
 
+        $scope.toggleMaterial = function () {
+          $scope.material.enabled = !$scope.material.enabled;
+        }
+
       }
     };
 
