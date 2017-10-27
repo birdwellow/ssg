@@ -111,7 +111,7 @@ gulp.task('js:dev', ['js-sources'], function(){
  */
 
 var gulpSassSrc = gulpSrc.filter(function (currentValue) {
-  return currentValue.indexOf('.scss') !== -1;
+  return currentValue.indexOf('.scss') !== -1 || currentValue.indexOf('.css') !== -1;
 });
 
 gulp.task('css', function () {
