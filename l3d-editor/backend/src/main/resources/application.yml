@@ -4,7 +4,8 @@ server:
   port: 8880
 
 spring:
-  jpa.hibernate.ddl-auto: create
+  jpa.hibernate.ddl-auto: none
+#  jpa.hibernate.ddl-auto: create
   datasource:
     url: jdbc:mysql://localhost:3306/l3deditor
     username: private

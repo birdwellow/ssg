@@ -2,8 +2,6 @@
 
   'use strict';
 
-
-  var refNames = L3DEditor.Catalog.getNames();
   var typeNames = L3DEditor.DefinitionService.getDefinitionTemplateNames();
 
   angular.module('Editor').directive('modelInput', function () {
@@ -18,7 +16,7 @@
       },
       controller: function ($scope) {
 
-        $scope.refNames = refNames;
+        $scope.refNames = L3DEditor.Catalog.getNames();
         $scope.typeNames = typeNames;
 
         $scope.addPart = function () {

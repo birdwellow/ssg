@@ -17,7 +17,8 @@ button {
   }
 
   select,
-  input[type=number] {
+  input[type=number],
+  input[type=text] {
     border: 1px solid #fff;
     background: rgba(0, 0, 0, 0.5);
     color: #777;
@@ -29,10 +30,18 @@ button {
     width: 150px;
   }
 
-  input[type=number] {
-    background: none !important;
+  input[type=number],
+  input[type=text] {
+    background: none;
     width: 80px;
     margin-right: 10px;
+  }
+
+  .material {
+    input[type=number],
+    input[type=text] {
+      background: rgba(0, 0, 0, 0.5);
+    }
   }
 
   .input.enum.type {

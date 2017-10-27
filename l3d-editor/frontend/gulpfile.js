@@ -49,7 +49,8 @@ gulp.task('html-templates', function(){
       filePath: 'templates.js',
       prefix: 'js/'
     }))
-    .pipe(gulp.dest(targetDir + 'tmp'));
+    .pipe(gulp.dest(targetDir + 'tmp'))
+    .pipe(browserSync.reload({stream:true}));
   // .pipe(browserSync.reload({stream:true, once: true}));
 });
 
@@ -153,8 +154,8 @@ gulp.task('bs-reload', function () {
  */
 
 gulp.task('watch', ['dev', 'browser-sync'], function () {
-  gulp.watch("src/scss/**/*.scss", ['css']);
-  gulp.watch("src/js/**/*.js", ['js']);
+  gulp.watch("src/**/*.scss", ['css']);
+  gulp.watch("src/**/*.js", ['js']);
   gulp.watch("src/**/*.html", ['html']);
   gulp.watch(targetDir + "**/*", ['bs-reload']);
 });

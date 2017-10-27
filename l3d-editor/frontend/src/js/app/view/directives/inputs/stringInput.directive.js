@@ -3,11 +3,11 @@
   'use strict';
 
 
-  angular.module('Editor').directive('numberInput', function () {
+  angular.module('Editor').directive('stringInput', function () {
 
     return {
       restrict: 'E',
-      templateUrl: 'js/app/view/directives/inputs/numberInput.directive.html',
+      templateUrl: 'js/app/view/directives/inputs/stringInput.directive.html',
       replace: true,
       scope: {
         value: '=',

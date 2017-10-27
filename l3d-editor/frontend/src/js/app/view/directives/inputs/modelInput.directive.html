@@ -4,18 +4,18 @@
   <enum-input class="type" model="model" field="type" enum-values="typeNames"></enum-input>
   <enum-input class="name" model="model" field="name" enum-values="refNames"></enum-input>
 
-  <simple-input value="model.height" label="height"></simple-input>
-  <simple-input value="model.width" label="width"></simple-input>
+  <number-input value="model.height" label="height"></number-input>
+  <number-input value="model.width" label="width"></number-input>
   <array-input array="model.radii" label="radii"></array-input>
   <array-input array="model.dimensions" label="dimensions"></array-input>
   <array-input array="model.position" label="position"></array-input>
   <array-input array="model.rotation" label="rotation"></array-input>
-  <simple-input value="model.roundness" label="roundness"></simple-input>
+  <number-input value="model.roundness" label="roundness"></number-input>
   <boolean-input value="model.bevelEnabled" label="bevel enabled"></boolean-input>
   <span ng-if="model.bevelEnabled">
-    <simple-input value="model.bevelThickness" label="bevel thickness"></simple-input>
-    <simple-input value="model.bevelSize" label="bevel size"></simple-input>
-    <simple-input value="model.bevelSegments" label="bevel segments"></simple-input>
+    <number-input value="model.bevelThickness" label="bevel thickness"></number-input>
+    <number-input value="model.bevelSize" label="bevel size"></number-input>
+    <number-input value="model.bevelSegments" label="bevel segments"></number-input>
   </span>
   <two-dim-array-input array="model.points" label="points" minimal-length="3"></two-dim-array-input>
 
