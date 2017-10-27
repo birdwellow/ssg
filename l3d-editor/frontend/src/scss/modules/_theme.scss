@@ -12,60 +12,42 @@
   }
 }
 
+
+@mixin model($border, $background) {
+  border-color: $border;
+  background: $background;
+
+  select,
+  input[type=number],
+  input[type=text] {
+    border-color: $border;
+  }
+}
+
 .model-input {
 
   // Composite -> green
   &.composite {
-    border-color: #8f8;
-    background: #121;
-
-    select,
-    input[type=number]{
-      border-color: #8f8;
-    }
+    @include model(#8f8, #121);
   }
 
   // Box -> blue
   &.box {
-    border-color: #08f;
-    background: #012;
-
-    select,
-    input[type=number]{
-      border-color: #08f;
-    }
+    @include model(#08f, #012);
   }
 
   // Ref -> red
   &.ref {
-    border-color: #f88;
-    background: #211;
-
-    select,
-    input[type=number]{
-      border-color: #f88;
-    }
+    @include model(#f88, #211);
   }
 
   // Cylinder -> orange
   &.cylinder {
-    border-color: #fa0;
-    background: #210;
-
-    select,
-    input[type=number]{
-      border-color: #fa0;
-    }
+    @include model(#fa0, #210);
   }
 
   // Extrude -> violet
   &.extrude {
-    border-color: #f8f;
-    background: #212;
-
-    select,
-    input[type=number]{
-      border-color: #f8f;
-    }
+    @include model(#f8f, #212);
   }
 }
