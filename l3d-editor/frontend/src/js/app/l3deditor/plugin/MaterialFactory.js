@@ -27,18 +27,20 @@ L3DEditor = (function (THREE, L3DEditor) {
 
   L3DEditor.MaterialFactory = {
 
-    createFromDefinition: function (definition) {
+    createFromDefinition: function (definition, alternativeMaterial) {
       if (definition && definition.isMouseOver && L3DEditor.Config.isMarkOnMouseOver) {
         return new THREE.MeshBasicMaterial({
           color: "red"
         });
       }
+
+      var materialDefinition = (definition.material && definition.material.enabled) ? definition.material : alternativeMaterial;
       var materialType = 'phong';
-      if (definition && definition.material && definition.material.type) {
-        materialType = definition.material.type;
+      if (materialDefinition && materialDefinition.type) {
+        materialType = materialDefinition.type;
       }
       var factory = factories[materialType];
-      var material = factory(definition.material);
+      var material = factory(materialDefinition || {});
       return material;
     }
 
