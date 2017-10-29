@@ -1,6 +1,7 @@
 package net.fvogel.controller;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
@@ -27,8 +29,11 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 public class ImageController {
 
     @RequestMapping(method = POST)
-    public void saveImages(@RequestParam("files") List<MultipartFile> files) {
-
+    public void saveImages(MultipartHttpServletRequest request) {
+        for (Iterator<String> it = request.getFileNames(); it.hasNext(); ) {
+            String fileName = it.next();
+            MultipartFile file = request.getFile(fileName);
+        }
     }
 
 }

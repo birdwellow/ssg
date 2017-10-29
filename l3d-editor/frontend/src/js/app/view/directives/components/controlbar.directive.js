@@ -3,7 +3,7 @@
   'use strict';
 
 
-  angular.module('Editor').directive('controlbar', function ($uibModal, $document) {
+  angular.module('Editor').directive('controlbar', function ($uibModal) {
 
     return {
       restrict: 'E',
