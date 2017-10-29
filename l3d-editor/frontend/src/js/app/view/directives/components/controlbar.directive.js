@@ -11,15 +11,12 @@
       replace: true,
       controller: function ($scope) {
 
-        var modalParent = angular.element($document[0].querySelector('.modal-parent'));
-
         $scope.imageManagementModal = function () {
           var modal = $uibModal.open({
             animation: false,
-            templateUrl: 'js/app/view/directives/components/imageManagement.modal.html',
-            controller: 'ModalInstanceCtrl',
-            appendTo: modalParent,
-            controllerAs: '$ctrl'
+            component: 'imageManagementModalComponent',
+            appendTo: angular.element(document.body),
+            size: 'lg'
           });
         };
 
@@ -27,7 +24,5 @@
     };
 
   });
-
-
 
 })(L3DEditor);
