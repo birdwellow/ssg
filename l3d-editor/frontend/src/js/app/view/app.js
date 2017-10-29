@@ -3,6 +3,6 @@
   'use strict';
 
 
-  angular.module('Editor', ['colorpicker.module']);
+  angular.module('Editor', ['colorpicker.module', 'ui.bootstrap']);
 
 })();

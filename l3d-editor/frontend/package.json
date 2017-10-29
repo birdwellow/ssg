@@ -33,15 +33,20 @@
     "three/examples/js/controls/OrbitControls.js",
     "angular/angular.js",
     "angular-bootstrap-colorpicker/js/bootstrap-colorpicker-module.js",
+    "angular-ui-bootstrap/dist/ui-bootstrap.js",
+    "angular-ui-bootstrap/dist/ui-bootstrap-tpls.js",
 
     "bootstrap/scss/bootstrap.scss",
     "font-awesome/scss/font-awesome.scss",
     "angular-bootstrap-colorpicker/css/colorpicker.css",
+    "angular-ui-bootstrap/dist/ui-bootstrap-csp.css",
+
     "font-awesome/fonts/**/*"
   ],
   "dependencies": {
     "angular": "^1.6.6",
     "angular-bootstrap-colorpicker": "^3.0.31",
+    "angular-ui-bootstrap": "^2.5.6",
     "bootstrap": "^4.0.0-beta",
     "jquery": ">=3.0.0",
     "popper.js": "^1.11.0",
