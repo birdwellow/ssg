@@ -1,5 +1,6 @@
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
   <form class="form-inline mt-2 mt-md-0 mr-auto">
+
     <input
       type="checkbox"
       name="isRotationActive"
@@ -7,6 +8,7 @@
       ng-model="config.isRotationActive"
       class="form-control">
     <label for="isRotationActive">Rotation</label>
+
     <input
       type="checkbox"
       name="isMarkOnMouseOver"
@@ -14,12 +16,20 @@
       ng-model="config.isMarkOnMouseOver"
       class="form-control">
     <label for="isMarkOnMouseOver">Mark on mouseover</label>
+
+    <button class="btn btn-outline-info my-2 my-sm-0" ng-click="imageManagementModal()">
+      Manage Images
+    </button>
+
   </form>
+
   <form class="form-inline mt-2 mt-md-0">
+
     <div ng-if="error" class="notification error">
       {{ error }}
       <button class="btn btn-danger remove" ng-click="hideError()">Ok</button>
     </div>
+
     <div ng-if="success" class="notification success">{{ success }}</div>
 
     <select
@@ -27,12 +37,16 @@
       ng-model="catalogDefinitionName"
       ng-options="name for name in catalogDefinitionNames">
     </select>
+
     <input type="text" class="form-control mr-sm-2" placeholder="Save as" aria-label="Save as" ng-model="saveCatalogDefinitionName"/>
+
     <button class="btn btn-outline-success my-2 my-sm-0" ng-click="save()">
       Save
     </button>
+
     <button class="btn btn-outline-info my-2 my-sm-0" ng-click="newDefinition()">
       New
     </button>
+
   </form>
 </nav>

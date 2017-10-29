@@ -39,8 +39,6 @@
     "bootstrap/scss/bootstrap.scss",
     "font-awesome/scss/font-awesome.scss",
     "angular-bootstrap-colorpicker/css/colorpicker.css",
-    "angular-ui-bootstrap/dist/ui-bootstrap-csp.css",
-
     "font-awesome/fonts/**/*"
   ],
   "dependencies": {
