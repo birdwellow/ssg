@@ -63,8 +63,6 @@
           L3DEditor.Catalog.setDefinitions(definitionMap);
           $scope.catalogDefinitionNames = L3DEditor.Catalog.getNames();
           $scope.catalogDefinitionName = $scope.catalogDefinitionName || $scope.catalogDefinitionNames[0];
-        }, function(error) {
-          error('An error occurred (' + error + ')');
         });
     };
 

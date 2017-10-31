@@ -20,8 +20,8 @@ public class TextureResourceService {
 
     private static Map<String, List> textureMap = loadTextureMap();
 
-    public List<String> getAllTopologyTextures() {
-        return textureMap.get(TEXTURE_TOPOLOGY);
+    public Map<String, List> getAllTextures() {
+        return textureMap;
     }
 
     private static Map<String, List> loadTextureMap() {

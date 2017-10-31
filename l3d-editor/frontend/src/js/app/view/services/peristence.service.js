@@ -1,4 +1,4 @@
-(function (L3DEditor) {
+(function () {
 
   'use strict';
 
@@ -8,6 +8,12 @@
     .service('PersistenceService', function ($http) {
 
       var baseUrl = 'http://localhost:8880/';
+
+      var texturesPromise = $http.get(baseUrl + 'textures').then(function (response) {
+        return response.data;
+      }, function (error) {
+        error('An error occurred (' + error + ')');
+      });
 
       var getAllDefinitions = function () {
         return $http.get(baseUrl + 'definitions').then(function (response) {
@@ -45,12 +51,17 @@
         });
       };
 
+      var getAllTextures = function () {
+        return texturesPromise;
+      };
+
     return {
       getAllDefinitions: getAllDefinitions,
       getDefinitionNames: getDefinitionNames,
-      saveDefinition: saveDefinition
+      saveDefinition: saveDefinition,
+      getAllTextures: getAllTextures
     };
 
   });
 
-})(L3DEditor);
+})();

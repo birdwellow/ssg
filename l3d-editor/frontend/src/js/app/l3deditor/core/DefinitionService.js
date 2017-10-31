@@ -14,7 +14,8 @@ L3DEditor = (function (L3DEditor) {
     "material": {
       "enabled": false,
       "type": "phong",
-      "color": "red"
+      "color": "red",
+      "topology": null
     },
     "_dustbin": {},
     "isMouseOver": false

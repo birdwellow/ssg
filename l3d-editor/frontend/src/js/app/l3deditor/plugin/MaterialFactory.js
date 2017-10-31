@@ -3,24 +3,31 @@ L3DEditor = (function (THREE, L3DEditor) {
   'use strict';
 
 
+  var textureLoader = new THREE.TextureLoader();
+
   var factories = {
 
-    "phong": function (material) {
-      return new THREE.MeshPhongMaterial({
-        color: material.color
-      });
+    "lambert": function (material) {
+      var config = {};
+      config.color = material.color;
+
+      return new THREE.MeshLambertMaterial(config);
     },
 
-    "lambert": function (material) {
-      return new THREE.MeshLambertMaterial({
-        color: material.color
-      });
+    "phong": function (material) {
+      var config = {};
+      config.color = material.color;
+      config.bumpMap = material.topology ? textureLoader.load(material.topology) : undefined;
+
+      return new THREE.MeshPhongMaterial(config);
     },
 
     "standard": function (material) {
-      return new THREE.MeshStandardMaterial({
-        color: material.color
-      });
+      var config = {};
+      config.color = material.color;
+      config.bumpMap = material.topology ? textureLoader.load(material.topology) : undefined;
+
+      return new THREE.MeshStandardMaterial(config);
     }
 
   };

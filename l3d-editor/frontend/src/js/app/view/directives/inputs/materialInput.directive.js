@@ -5,7 +5,7 @@
 
   var materialNames = L3DEditor.DefinitionService.getMaterialNames();
 
-  angular.module('Editor').directive('materialInput', function () {
+  angular.module('Editor').directive('materialInput', function (PersistenceService) {
 
     return {
       restrict: 'E',
@@ -21,7 +21,13 @@
 
         $scope.toggleMaterial = function () {
           $scope.material.enabled = !$scope.material.enabled;
-        }
+        };
+
+        PersistenceService.getAllTextures()
+          .then(function (topologies) {
+            $scope.topologyOptions = L3DEditor.ObjectUtils.copyObject(topologies['topology']);
+            $scope.topologyOptions.unshift(null);
+          });
 
       }
     };
