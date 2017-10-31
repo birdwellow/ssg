@@ -65,11 +65,15 @@ var gulpFontsSrc = gulpSrc.filter(function (currentValue) {
 
 gulp.task('fonts',function(){
   return gulp.src(gulpFontsSrc)
-    .pipe(gulp.dest(targetDir + 'fonts'))
-  // .pipe(browserSync.reload({stream:true, once: true}));
+    .pipe(gulp.dest(targetDir + 'fonts'));
 });
 
-gulp.task('assets', ['fonts']);
+gulp.task('textures',function(){
+  return gulp.src('src/textures/**')
+    .pipe(gulp.dest(targetDir + 'textures'));
+});
+
+gulp.task('assets', ['textures', 'fonts']);
 
 /**
  * JS Build
