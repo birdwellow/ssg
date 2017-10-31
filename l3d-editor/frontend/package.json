@@ -35,7 +35,6 @@
     "angular-bootstrap-colorpicker/js/bootstrap-colorpicker-module.js",
     "angular-ui-bootstrap/dist/ui-bootstrap.js",
     "angular-ui-bootstrap/dist/ui-bootstrap-tpls.js",
-    "angular-upload/angular-upload.js",
     "bootstrap/scss/bootstrap.scss",
     "font-awesome/scss/font-awesome.scss",
     "angular-bootstrap-colorpicker/css/colorpicker.css",

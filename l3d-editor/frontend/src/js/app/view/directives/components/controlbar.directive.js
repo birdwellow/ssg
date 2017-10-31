@@ -1,28 +1,16 @@
-(function (L3DEditor) {
+(function () {
 
   'use strict';
 
 
-  angular.module('Editor').directive('controlbar', function ($uibModal) {
+  angular.module('Editor').directive('controlbar', function () {
 
     return {
       restrict: 'E',
       templateUrl: 'js/app/view/directives/components/controlbar.directive.html',
-      replace: true,
-      controller: function ($scope) {
-
-        $scope.imageManagementModal = function () {
-          var modal = $uibModal.open({
-            animation: false,
-            component: 'imageManagementModalComponent',
-            appendTo: angular.element(document.body),
-            size: 'lg'
-          });
-        };
-
-      }
+      replace: true
     };
 
   });
 
-})(L3DEditor);
+})();
