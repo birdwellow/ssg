@@ -48,16 +48,36 @@
     return camera;
   }
 
-  function createDirectionalLight() {
-    var light = new THREE.DirectionalLight(0xffffff, 1);
-    light.position.set(100, 50, -10);
+  function createPointLight() {
+    var light = new THREE.PointLight(0xffffff, 1, 1000);
+    light.position.set(100, 100, 100);
     light.name = 'directional';
+
+    light.castShadow = true;
+    light.target = {
+      position: {
+        x: 0,
+        y: 0,
+        z: 0
+      }
+    };
+    light.shadow.camera.near = 0.5;
+    light.shadow.camera.far = 5000;
+    light.shadow.camera.left = -500;
+    light.shadow.camera.bottom = -500;
+    light.shadow.camera.right = 500;
+    light.shadow.camera.top = 500;
+
     return light;
   }
 
   function createAmbientLight() {
     var light = new THREE.AmbientLight(0x333333);
     return light;
+  }
+
+  function createLight() {
+    return createPointLight();
   }
 
   function show(rawDefinition) {
@@ -83,8 +103,7 @@
 
     show(definitions);
 
-    scene.add(createDirectionalLight());
-    scene.add(createAmbientLight());
+    scene.add(createLight());
 
     htmlNode.append(renderer.domElement);
 

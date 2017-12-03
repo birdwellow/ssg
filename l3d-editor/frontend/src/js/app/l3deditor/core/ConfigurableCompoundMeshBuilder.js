@@ -28,6 +28,8 @@ L3DEditor = (function (THREE, L3DEditor) {
 
   var createMesh = function (geometry, material, definition) {
     var mesh = new THREE.Mesh(geometry, material);
+    mesh.castShadow = true;
+    mesh.receiveShadow = true;
     positionAndAdjustMesh(mesh, definition);
     return mesh;
   };
