@@ -63,9 +63,8 @@ L3DEditor = (function (THREE, L3DEditor) {
       });
 
       var glowGeometry = mesh.geometry.clone();
-      glowGeometry = new THREE.SphereBufferGeometry(10, 40, 40);
       // var modifier = new THREE.SubdivisionModifier( 2 );
-      // modifier.modify( moonGlowGeometry );
+      // modifier.modify(glowGeometry);
 
       var glow = new THREE.Mesh(glowGeometry, glowMaterial);
       glow.position.set(
@@ -73,7 +72,7 @@ L3DEditor = (function (THREE, L3DEditor) {
         mesh.position.y,
         mesh.position.z
       );
-      glow.scale.multiplyScalar(1.2);
+      glow.scale.multiplyScalar(definition.glow.scale || 1.2);
 
       return glow;
     }

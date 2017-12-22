@@ -20,6 +20,7 @@ L3DEditor = (function (L3DEditor) {
     "glow": {
       "enabled": false,
       "color": "#ff8800",
+      "scale": 1.2,
       "c": 0.1,
       "p": 1.8
     },
