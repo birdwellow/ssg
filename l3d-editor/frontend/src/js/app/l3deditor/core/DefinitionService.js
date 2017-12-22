@@ -44,6 +44,9 @@ L3DEditor = (function (L3DEditor) {
       "bevelSize": 1,
       "bevelSegments": 1
     },
+    "sphere": {
+      "radius": 10
+    },
     "composite": {
       "parts": [],
       "_parts": []

@@ -43,6 +43,10 @@ L3DEditor = (function (THREE, L3DEditor) {
       };
 
       return new THREE.ExtrudeBufferGeometry(shape, extrudeSettings);
+    },
+
+    "sphere": function (definition) {
+      return new THREE.SphereBufferGeometry(definition.radius, 32, 32);
     }
 
   };

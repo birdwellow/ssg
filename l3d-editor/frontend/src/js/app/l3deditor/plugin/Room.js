@@ -34,6 +34,7 @@
     var dim = getDimensions(htmlNode);
     renderer.setSize(dim.width, dim.height);
     renderer.shadowMapEnabled = true;
+    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     return renderer;
   }
 
