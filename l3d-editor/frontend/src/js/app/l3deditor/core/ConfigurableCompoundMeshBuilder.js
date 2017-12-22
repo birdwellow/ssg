@@ -3,6 +3,8 @@ L3DEditor = (function (THREE, L3DEditor) {
   'use strict';
 
 
+  var camera;
+
   var translate = function (mesh, position) {
     if (Array.isArray(position)) {
       mesh.position.set(
@@ -48,6 +50,10 @@ L3DEditor = (function (THREE, L3DEditor) {
       var partialDefinition = definitions[i];
       var mesh = create(partialDefinition, inheritedMaterial);
       meshes.push(mesh);
+      if (partialDefinition.glow && partialDefinition.glow.enabled) {
+        var glowMesh = L3DEditor.GlowFactory.createFromDefinitionAndGeometry(partialDefinition, mesh, camera);
+        meshes.push(glowMesh);
+      }
     }
     return meshes;
   };
@@ -61,6 +67,7 @@ L3DEditor = (function (THREE, L3DEditor) {
   };
 
   var create = function (definition, inheritedMaterial) {
+    camera = definition.camera || camera;
     if (definition.type === "composite") {
       return createCompositeMesh(definition, inheritedMaterial);
     } else {

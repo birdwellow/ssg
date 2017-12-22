@@ -17,6 +17,12 @@ L3DEditor = (function (L3DEditor) {
       "color": "red",
       "topology": null
     },
+    "glow": {
+      "enabled": false,
+      "color": "#ff8800",
+      "c": 0.1,
+      "p": 1.8
+    },
     "_dustbin": {},
     "isMouseOver": false
   };

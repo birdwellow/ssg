@@ -87,6 +87,7 @@
         scene.remove(object);
       }
       var compiledDefinition = L3DEditor.DefinitionService.compile(rawDefinition);
+      compiledDefinition.camera = camera;
       object = L3DEditor.ConfigurableCompoundMeshBuilder.create(compiledDefinition);
       scene.add(object);
     } catch (e) {

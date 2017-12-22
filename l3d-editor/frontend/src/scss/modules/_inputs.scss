@@ -47,7 +47,8 @@ button {
     margin-right: 10px;
   }
 
-  .material {
+  .material,
+  .glow {
     input[type=number],
     input[type=text] {
       background: rgba(0, 0, 0, 0.5);
@@ -75,7 +76,8 @@ button {
   }
 
 
-  .material {
+  .material,
+  .glow {
 
     border-radius: 5px;
 

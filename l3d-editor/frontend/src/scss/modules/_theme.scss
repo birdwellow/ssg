@@ -50,4 +50,9 @@
   &.extrude {
     @include model(#f8f, #212);
   }
+
+  // Sphere -> turquoise
+  &.sphere {
+    @include model(#0ff, #122);
+  }
 }

@@ -24,6 +24,8 @@
 
   <material-input material="model.material" label="material"></material-input>
 
+  <glow-input glow="model.glow" label="glow"></glow-input>
+
   <model-input
     ng-if="model.parts"
     ng-repeat="(key, part) in model.parts track by $index"

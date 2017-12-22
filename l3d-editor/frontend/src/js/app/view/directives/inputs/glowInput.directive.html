@@ -1,0 +1,11 @@
+<div class="input glow" ng-class="{'enabled': glow.enabled}">
+  <div class="header" ng-click="toggleGlow()">
+    <div class="fa" ng-class="{'fa-angle-down': !glow.enabled, 'fa-angle-up': glow.enabled}"></div>
+    Glow
+  </div>
+  <div class="content" ng-show="glow.enabled">
+    <color-input value="glow.color" label="color"></color-input>
+    <number-input value="glow.c" label="c" step="0.1"></number-input>
+    <number-input value="glow.p" label="p" step="0.1"></number-input>
+  </div>
+</div>
