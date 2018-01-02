@@ -14,5 +14,6 @@
 
     <modules>
         <module>l3d-editor</module>
+        <module>poc</module>
     </modules>
 </project>
