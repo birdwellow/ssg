@@ -8,6 +8,8 @@ import javax.annotation.PostConstruct;
 import net.fvogel.model.Planet;
 import net.fvogel.model.SolarSystem;
 import net.fvogel.model.meta.MetaInitStatus;
+import net.fvogel.model.typing.AtmosphereType;
+import net.fvogel.model.typing.PlanetSurfaceType;
 import net.fvogel.model.typing.PlanetType;
 import net.fvogel.model.typing.StarType;
 import net.fvogel.repo.MetaInitStatusRepository;
@@ -63,15 +65,41 @@ public class DataMigrationHook {
     private void createPlanets(SolarSystem solarSystem) {
         for (int i = 0; i <= getRandomInt(12); i++) {
             Planet planet = new Planet();
-            planet.setDiameter((short)getRandomInt(120, 24560));
-            planet.setDistance((short)getRandomInt(10, 10000));
-            planet.setHydrogenCapacity((short)getRandomInt(24));
-            planet.setIronCapacity((short)getRandomInt(24));
-            planet.setSiliconCapacity((short)getRandomInt(12));
             planet.setName(solarSystem.getName() + " " + (i + 1));
-            planet.setType(PlanetType.values()[getRandomInt(2)]);
-
             planet.setSolarSystem(solarSystem);
+
+            short distance = (short)getRandomInt(10, 10000);
+            planet.setDistance(distance);
+
+            PlanetType type = PlanetType.values()[getRandomInt(2)];
+            planet.setType(type);
+
+            double temperatureBase = 0;
+            String typeString = solarSystem.getType().toString();
+            if (typeString.contains("DWARF")) {
+                temperatureBase = 1;
+            } else if (typeString.contains("GIANT") || typeString.contains("TWIN") || typeString.contains("TRIPLET")) {
+                temperatureBase = 2;
+            }
+            temperatureBase = (temperatureBase / (distance)) * 500000l;
+            System.out.println(distance + " - " + temperatureBase);
+
+            if (PlanetType.GAS.equals(type)) {
+                planet.setDiameter((short)getRandomInt(15000, 25000));
+                planet.setHydrogenResources((short)999);
+                planet.setAtmosphere(AtmosphereType.GAS);
+                planet.setSurface(PlanetSurfaceType.GAS);
+                planet.setTempUpperBound((short) (temperatureBase * 1.1));
+                planet.setTempLowerBound((short) (temperatureBase * 0.9));
+            } else {
+                planet.setDiameter((short)getRandomInt(120, 19000));
+                planet.setHydrogenResources((short)getRandomInt(24));
+                planet.setIronResources((short)getRandomInt(24));
+                planet.setSiliconResources((short)getRandomInt(12));
+                planet.setTempUpperBound((short) (temperatureBase * 1.3));
+                planet.setTempLowerBound((short) (temperatureBase * 0.7));
+            }
+
             planetRepository.save(planet);
         }
     }

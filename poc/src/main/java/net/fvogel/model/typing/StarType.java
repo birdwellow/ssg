@@ -13,6 +13,9 @@ public enum StarType {
 
     WHITE_DWARF,
     NEUTRON_STAR,
-    BLACK_HOLE;
+    BLACK_HOLE,
+
+    TWIN,
+    TRIPLET;
 
 }
