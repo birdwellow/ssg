@@ -35,7 +35,7 @@ public class NationService {
 
         Planet unownedPlanet = findAssignablePlanet();
         if (unownedPlanet == null) {
-
+            throw new IllegalStateException("There is no planet left that could be assigned to this new nation");
         }
 
         String uuid = UUID.randomUUID().toString();
