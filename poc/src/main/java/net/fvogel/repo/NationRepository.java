@@ -7,6 +7,6 @@ public interface NationRepository extends JpaRepository<Nation, Long> {
 
     Nation findOneByUuid(String uuid);
 
-    Nation findOneByNameOrUserName(String name, String userName);
+    Nation findOneByName(String name);
 
 }

@@ -28,9 +28,9 @@ public class NationService {
 
         if (!isNationDataUnique(nationData)) {
             throw new IllegalArgumentException(String.format(
-                    "Nation is not unique; either name '%s' or userName '%s' is not unique",
-                    nationData.getName(),
-                    nationData.getUserName()));
+                    "Nation is not unique; either name '%s' is not unique",
+                    nationData.getName()
+            ));
         }
 
         Planet unownedPlanet = findAssignablePlanet();
@@ -43,7 +43,6 @@ public class NationService {
         Nation nation = new Nation();
         nation.setUuid(uuid);
         nation.setCredits(200);
-        nation.setUserName(nationData.getUserName());
         nation.setName(nationData.getName());
 
         nationRepository.save(nation);
@@ -66,7 +65,7 @@ public class NationService {
     }
 
     private boolean isNationDataUnique(Nation nationData) {
-        Nation existingNation = nationRepository.findOneByNameOrUserName(nationData.getName(), nationData.getUserName());
+        Nation existingNation = nationRepository.findOneByName(nationData.getName());
         return existingNation == null;
     }
 

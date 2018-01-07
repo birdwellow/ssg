@@ -20,6 +20,7 @@ public class Planet {
 
     @Id
     @GeneratedValue
+    @JsonIgnore
     Long id;
 
     Timestamp lastUpdateAt = new Timestamp(System.currentTimeMillis());

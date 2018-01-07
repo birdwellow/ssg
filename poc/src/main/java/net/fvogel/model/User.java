@@ -1,23 +1,21 @@
 package net.fvogel.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
-import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.validator.constraints.Email;
 
 @Entity
 @Data
-public class Nation {
+public class User {
 
     @Id
     @GeneratedValue
@@ -29,14 +27,14 @@ public class Nation {
     @Column(unique = true)
     String name;
 
+    @Email
     @NotNull
-    int credits;
+    String email;
 
-    @NotNull
-    @NotEmpty
-    String uuid;
+    String password;
 
-    @OneToMany
-    List<Planet> planets = new ArrayList<>();
+    @Transient
+    String passwordConfirm;
+
 
 }

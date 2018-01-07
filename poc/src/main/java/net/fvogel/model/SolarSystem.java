@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import net.fvogel.model.typing.StarType;
 
@@ -17,6 +18,7 @@ public class SolarSystem {
 
     @Id
     @GeneratedValue
+    @JsonIgnore
     Long id;
 
     String name;
