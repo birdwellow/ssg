@@ -4,6 +4,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import net.fvogel.model.Account;
+import net.fvogel.model.AccountRegistration;
+import net.fvogel.model.Login;
 import net.fvogel.service.SecurityService;
 import net.fvogel.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,14 +25,15 @@ public class AuthResource {
     SecurityService securityService;
 
     @RequestMapping(method = RequestMethod.POST, value = "/register")
-    public void register(@RequestBody Account account, HttpServletRequest request) {
-        accountService.createAccount(account);
-        securityService.login(account.getUserName(), account.getPassword(), request);
+    public void register(@RequestBody AccountRegistration registration, HttpServletRequest request) {
+        String password = registration.getPassword();
+        Account account = accountService.createAccountFromRegistration(registration);
+        securityService.login(account.getUserName(), password, request);
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/login")
-    public void login(@RequestBody Account account, HttpServletRequest request) {
-        securityService.login(account, request);
+    public void login(@RequestBody Login login, HttpServletRequest request) {
+        securityService.login(login, request);
     }
 
     @RequestMapping(value = "/logout")

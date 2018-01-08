@@ -5,7 +5,7 @@ import java.util.HashSet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import net.fvogel.model.Account;
+import net.fvogel.model.Login;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -34,13 +34,13 @@ public class SecurityService {
         return null;
     }
 
-    public void login(Account account, HttpServletRequest request) {
+    public void login(Login login, HttpServletRequest request) {
         // TODO: add null check
-        login(account.getUserName(), account.getPassword(), request);
+        login(login.getLoginName(), login.getPassword(), request);
     }
 
-    public void login(String userName, String password, HttpServletRequest request) {
-        UserDetails userDetails = userDetailsService.loadUserByUsername(userName);
+    public void login(String loginName, String password, HttpServletRequest request) {
+        UserDetails userDetails = userDetailsService.loadUserByUsername(loginName);
         if (userDetails != null) {
             UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(userDetails, password, new HashSet<>());
             authenticationManager.authenticate(token);
@@ -57,7 +57,7 @@ public class SecurityService {
             System.out.println("Not authenticated");
             return;
         }
-        System.out.println("No user named '" + userName + "' could be found");
+        System.out.println("No user named '" + loginName + "' could be found");
     }
 
     public void logout(HttpServletRequest request, HttpServletResponse response) {

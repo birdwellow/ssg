@@ -28,12 +28,10 @@ public class Account {
 
     @Email
     @NotNull
+    @Column(unique = true)
     String email;
 
+    @JsonIgnore
     String password;
-
-    @Transient
-    String passwordConfirm;
-
 
 }
