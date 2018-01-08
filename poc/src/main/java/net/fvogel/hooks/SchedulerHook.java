@@ -39,5 +39,4 @@ public class SchedulerHook {
         scheduler.scheduleJob(job, trigger);
     }
 
-
 }

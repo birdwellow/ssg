@@ -4,9 +4,8 @@ import java.util.HashSet;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import net.fvogel.model.User;
+import net.fvogel.model.Account;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -15,7 +14,6 @@ import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Service;
 
@@ -36,9 +34,9 @@ public class SecurityService {
         return null;
     }
 
-    public void login(User user, HttpServletRequest request) {
+    public void login(Account account, HttpServletRequest request) {
         // TODO: add null check
-        login(user.getName(), user.getPassword(), request);
+        login(account.getUserName(), account.getPassword(), request);
     }
 
     public void login(String userName, String password, HttpServletRequest request) {

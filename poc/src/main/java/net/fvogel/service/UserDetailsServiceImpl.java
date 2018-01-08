@@ -2,9 +2,10 @@ package net.fvogel.service;
 
 import java.util.HashSet;
 
-import net.fvogel.model.User;
-import net.fvogel.repo.UserRepository;
+import net.fvogel.model.Account;
+import net.fvogel.repo.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -14,17 +15,17 @@ import org.springframework.stereotype.Service;
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
-    UserRepository userRepository;
+    AccountRepository accountRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByName(username);
-        if (user == null) {
-            return null;
+        Account account = accountRepository.findByUserName(username);
+        if (account == null) {
+            throw new UsernameNotFoundException("No account with name '" + username + "' found");
         }
-        UserDetails userDetails = new org.springframework.security.core.userdetails.User(
-                user.getName(),
-                user.getPassword(),
+        UserDetails userDetails = new User(
+                account.getUserName(),
+                account.getPassword(),
                 new HashSet<>()
         );
         return userDetails;
