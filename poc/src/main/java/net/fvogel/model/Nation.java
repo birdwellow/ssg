@@ -7,7 +7,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -38,5 +40,9 @@ public class Nation {
 
     @OneToMany
     List<Planet> planets = new ArrayList<>();
+
+    @OneToOne
+    @JoinColumn(name = "account_id")
+    Account account;
 
 }

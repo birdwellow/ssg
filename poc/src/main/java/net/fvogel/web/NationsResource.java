@@ -1,7 +1,11 @@
 package net.fvogel.web;
 
+import javax.servlet.http.HttpServletResponse;
+
+import net.fvogel.model.Account;
 import net.fvogel.model.Nation;
 import net.fvogel.repo.NationRepository;
+import net.fvogel.service.AccountService;
 import net.fvogel.service.NationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,8 +24,21 @@ public class NationsResource {
     @Autowired
     NationService nationService;
 
+    @Autowired
+    AccountService accountService;
+
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public Nation getCurrentUsersNation(HttpServletResponse response) {
+        Account account = accountService.getCurrentAccount();
+        if (account == null) {
+            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+            return null;
+        }
+        return account.getNation();
+    }
+
     @RequestMapping(value = "/{uuid}", method = RequestMethod.GET)
-    public Nation getNation(@PathVariable() String uuid) {
+    public Nation getNationByUuid(@PathVariable() String uuid) {
         return nationRepository.findOneByUuid(uuid);
     }
 

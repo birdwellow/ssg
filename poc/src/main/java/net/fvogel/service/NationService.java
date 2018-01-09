@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+import net.fvogel.exception.ConflictingEntitiesException;
+import net.fvogel.model.Account;
 import net.fvogel.model.Nation;
 import net.fvogel.model.Planet;
 import net.fvogel.model.typing.PlanetType;
@@ -19,12 +21,20 @@ public class NationService {
     RandomizerService randomizerService;
 
     @Autowired
+    AccountService accountService;
+
+    @Autowired
     PlanetRepository planetRepository;
 
     @Autowired
     NationRepository nationRepository;
 
     public Nation registerNewNation(Nation nationData) {
+        Account account = accountService.getCurrentAccount();
+
+        if (account.getNation() != null) {
+            throw new ConflictingEntitiesException("A nation is already associated with that account");
+        }
 
         if (!isNationDataUnique(nationData)) {
             throw new IllegalArgumentException(String.format(
@@ -44,6 +54,7 @@ public class NationService {
         nation.setUuid(uuid);
         nation.setCredits(200);
         nation.setName(nationData.getName());
+        nation.setAccount(account);
 
         nationRepository.save(nation);
         unownedPlanet.setNation(nation);

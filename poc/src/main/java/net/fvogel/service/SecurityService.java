@@ -1,10 +1,12 @@
 package net.fvogel.service;
 
+import java.security.Principal;
 import java.util.HashSet;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import net.fvogel.model.Account;
 import net.fvogel.model.Login;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -12,6 +14,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
@@ -26,12 +29,10 @@ public class SecurityService {
     @Autowired
     UserDetailsService userDetailsService;
 
-    public String getCurrentSessionUserName() {
-        Object details = SecurityContextHolder.getContext().getAuthentication().getDetails();
-        if (details instanceof UserDetails) {
-            return ((UserDetails) details).getUsername();
-        }
-        return null;
+    public User getCurrentSessionUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Object principal = authentication.getPrincipal();
+        return (User) principal;
     }
 
     public void login(Login login, HttpServletRequest request) {

@@ -16,6 +16,14 @@ public class AccountService {
     @Autowired
     BCryptPasswordEncoder passwordEncoder;
 
+    @Autowired
+    SecurityService securityService;
+
+    public Account getCurrentAccount() {
+        String userName = securityService.getCurrentSessionUser();
+        return accountRepository.findByUserName(userName);
+    }
+
     public Account createAccountFromRegistration(AccountRegistration registration) {
         if (registration == null || !registration.getPassword().equals(registration.getPasswordConfirmation())) {
             throw new IllegalArgumentException("Password and password confirmation don't match");

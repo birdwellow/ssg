@@ -3,6 +3,7 @@ package net.fvogel.service;
 import java.util.Arrays;
 import java.util.List;
 
+import net.fvogel.model.AccountRegistration;
 import net.fvogel.model.Planet;
 import net.fvogel.model.SolarSystem;
 import net.fvogel.model.typing.AtmosphereType;
@@ -26,6 +27,9 @@ public class GameDataSetupService {
     @Autowired
     private PlanetRepository planetRepository;
 
+    @Autowired
+    AccountService accountService;
+
     private List<String> systemNames = Arrays.asList(
             "Nermur",
             "Kyost",
@@ -33,6 +37,16 @@ public class GameDataSetupService {
             "Nhas Kw'heelst",
             "Shinsan"
     );
+
+    public void registerAccount() {
+        AccountRegistration accountRegistration = new AccountRegistration();
+        accountRegistration.setEmail("voll@depp.com");
+        accountRegistration.setPassword("qwertz");
+        accountRegistration.setPasswordConfirmation("qwertz");
+        accountRegistration.setUserName("J.Depp");
+
+        accountService.createAccountFromRegistration(accountRegistration);
+    }
 
     public void createPlanets() {
         for (String systemName : systemNames) {
