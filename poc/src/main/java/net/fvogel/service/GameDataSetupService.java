@@ -41,8 +41,8 @@ public class GameDataSetupService {
     public void registerAccount() {
         AccountRegistration accountRegistration = new AccountRegistration();
         accountRegistration.setEmail("voll@depp.com");
-        accountRegistration.setPassword("qwertz");
-        accountRegistration.setPasswordConfirmation("qwertz");
+        accountRegistration.setPassword("1234");
+        accountRegistration.setPasswordConfirmation("1234");
         accountRegistration.setUserName("J.Depp");
 
         accountService.createAccountFromRegistration(accountRegistration);

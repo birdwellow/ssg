@@ -35,6 +35,11 @@ public class SecurityService {
         return (User) principal;
     }
 
+    public String getCurrentSessionUserName() {
+        User currentSessionUser = getCurrentSessionUser();
+        return currentSessionUser.getUsername();
+    }
+
     public void login(Login login, HttpServletRequest request) {
         // TODO: add null check
         login(login.getLoginName(), login.getPassword(), request);

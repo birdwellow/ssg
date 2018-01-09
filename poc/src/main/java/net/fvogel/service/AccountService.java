@@ -20,7 +20,7 @@ public class AccountService {
     SecurityService securityService;
 
     public Account getCurrentAccount() {
-        String userName = securityService.getCurrentSessionUser();
+        String userName = securityService.getCurrentSessionUserName();
         return accountRepository.findByUserName(userName);
     }
 

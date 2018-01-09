@@ -23,6 +23,7 @@ public class Planet {
     @JsonIgnore
     Long id;
 
+    @JsonIgnore
     Timestamp lastUpdateAt = new Timestamp(System.currentTimeMillis());
 
     String name;

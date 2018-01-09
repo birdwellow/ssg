@@ -41,6 +41,7 @@ public class Nation {
     @OneToMany
     List<Planet> planets = new ArrayList<>();
 
+    @JsonIgnore
     @OneToOne
     @JoinColumn(name = "account_id")
     Account account;
