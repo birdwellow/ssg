@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import net.fvogel.exception.NoEntityExistingException;
 import net.fvogel.model.Account;
 import net.fvogel.model.Planet;
+import net.fvogel.model.typing.ResourceType;
 import net.fvogel.repo.NationRepository;
 import net.fvogel.repo.PlanetRepository;
 import net.fvogel.service.AccountService;
@@ -56,34 +57,35 @@ public class PlanetsResource {
 
     @RequestMapping(value = "/{id}/build", method = RequestMethod.POST)
     public void buildMines(
-            @PathVariable("id") Long id,
+            @PathVariable("id") Long planetId,
             @RequestParam("type") String type,
             @RequestParam("amount") Integer amount
     ) {
         Account account = accountService.getCurrentAccount();
-        Planet planet = getPlanetById(id);
+        Planet planet = getPlanetById(planetId);
         if (planet == null) {
-            throw new NoEntityExistingException("No planet with ID '" + id + "' exists");
+            throw new NoEntityExistingException("No planet with ID '" + planetId + "' exists");
         }
         if (amount < 0) {
             throw new IllegalArgumentException("Cannot build less than zero mines");
         }
-        switch (type) {
-            case "fe":
-                Integer credits = account.getNation().getCredits();
-                Integer price = amount * 35;
-                if (credits - price < 0) {
-                    throw new IllegalArgumentException("You don't have enough credits!");
-                }
-                account.getNation().setCredits(credits - price);
-                planet.setIronMines((short)(planet.getIronMines() + amount.shortValue()));
-                nationRepository.save(account.getNation());
-                planetRepository.save(planet);
-                break;
-            case "h2": break;
-            case "si": break;
-            default: break;
-        }
+        ResourceType resourceType = ResourceType.valueOf(type.toUpperCase());
+//        switch (resourceType) {
+//            case ResourceType.FE:
+//                Integer credits = account.getNation().getCredits();
+//                Integer price = amount * 35;
+//                if (credits - price < 0) {
+//                    throw new IllegalArgumentException("You don't have enough credits!");
+//                }
+//                account.getNation().setCredits(credits - price);
+//                planet.setIronMines((short)(planet.getIronMines() + amount.shortValue()));
+//                nationRepository.save(account.getNation());
+//                planetRepository.save(planet);
+//                break;
+//            case "h2": break;
+//            case "si": break;
+//            default: break;
+//        }
 
     }
 

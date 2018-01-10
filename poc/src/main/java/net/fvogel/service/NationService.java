@@ -32,8 +32,7 @@ public class NationService {
         return nationRepository.findOne(id);
     }
 
-    public Nation registerNewNation(Nation nationData) {
-        Account account = accountService.getCurrentAccount();
+    public Nation registerNewNation(Nation nationData, Account account) {
 
         if (account.getNation() != null) {
             throw new ConflictingEntitiesException("A nation is already associated with that account");
@@ -60,6 +59,11 @@ public class NationService {
         nationRepository.save(nation);
 
         return nation;
+    }
+
+    public Nation registerNewNation(Nation nationData) {
+        Account account = accountService.getCurrentAccount();
+        return registerNewNation(nationData, account);
     }
 
     private Planet findAssignablePlanet() {

@@ -1,16 +1,22 @@
 package net.fvogel.service;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import net.fvogel.model.Account;
 import net.fvogel.model.AccountRegistration;
+import net.fvogel.model.Nation;
 import net.fvogel.model.Planet;
+import net.fvogel.model.Resource;
 import net.fvogel.model.SolarSystem;
 import net.fvogel.model.typing.AtmosphereType;
 import net.fvogel.model.typing.PlanetSurfaceType;
 import net.fvogel.model.typing.PlanetType;
+import net.fvogel.model.typing.ResourceType;
 import net.fvogel.model.typing.StarType;
 import net.fvogel.repo.PlanetRepository;
+import net.fvogel.repo.ResourceRepository;
 import net.fvogel.repo.SolarSystemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,7 +34,13 @@ public class GameDataSetupService {
     private PlanetRepository planetRepository;
 
     @Autowired
+    private ResourceRepository resourceRepository;
+
+    @Autowired
     AccountService accountService;
+
+    @Autowired
+    NationService nationService;
 
     private List<String> systemNames = Arrays.asList(
             "Nermur",
@@ -38,14 +50,18 @@ public class GameDataSetupService {
             "Shinsan"
     );
 
-    public void registerAccount() {
+    public void registerAccountWithNation() {
         AccountRegistration accountRegistration = new AccountRegistration();
         accountRegistration.setEmail("voll@depp.com");
         accountRegistration.setPassword("1234");
         accountRegistration.setPasswordConfirmation("1234");
         accountRegistration.setUserName("J.Depp");
 
-        accountService.createAccountFromRegistration(accountRegistration);
+        Account account = accountService.createAccountFromRegistration(accountRegistration);
+
+        Nation nation = new Nation();
+        nation.setName("U.S.P.");
+        nationService.registerNewNation(nation, account);
     }
 
     public void createPlanets() {
@@ -91,16 +107,12 @@ public class GameDataSetupService {
 
         if (PlanetType.GAS.equals(type)) {
             planet.setDiameter((short)randomizer.getRandomInt(15000, 25000));
-            planet.setHydrogenResources((short)999);
             planet.setAtmosphere(AtmosphereType.GAS);
             planet.setSurface(PlanetSurfaceType.GAS);
             planet.setTempUpperBound((short) (temperatureBase * 1.1));
             planet.setTempLowerBound((short) (temperatureBase * 0.9));
         } else {
             planet.setDiameter((short)randomizer.getRandomInt(120, 19000));
-            planet.setHydrogenResources((short)randomizer.getRandomInt(24));
-            planet.setIronResources((short)randomizer.getRandomInt(24));
-            planet.setSiliconResources((short)randomizer.getRandomInt(12));
             planet.setTempUpperBound((short) (temperatureBase * 1.3));
             planet.setTempLowerBound((short) (temperatureBase * 0.7));
             planet.setAtmosphere(randomizer.getRandomEnumConstant(AtmosphereType.class));
@@ -108,6 +120,36 @@ public class GameDataSetupService {
         }
 
         planetRepository.save(planet);
+        planet.setResources(generateResources(planet));
+        planetRepository.save(planet);
+    }
+
+    private List<Resource> generateResources(Planet planet) {
+
+        List<Resource> resourceList = new ArrayList<>();
+
+        for (ResourceType resourceType : ResourceType.values()) {
+            Resource resource = new Resource(resourceType);
+            resource.setMineCapacity(randomizer.getRandomInt(24));
+            resource.setMineCount(0);
+            resource.setPlanet(planet);
+            resource.setStock(0D);
+            resourceList.add(resource);
+
+            if (PlanetType.GAS.equals(planet.getType())) {
+                if (ResourceType.H2.equals(resourceType)) {
+                    resource.setMineCapacity(randomizer.getRandomInt(999));
+                } else {
+                    resource.setMineCapacity(randomizer.getRandomInt(0));
+                }
+            }
+
+        }
+
+        resourceRepository.save(resourceList);
+
+        return resourceList;
+
     }
 
 }

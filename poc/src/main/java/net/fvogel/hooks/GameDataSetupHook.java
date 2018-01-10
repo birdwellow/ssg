@@ -26,8 +26,8 @@ public class GameDataSetupHook {
             return;
         }
 
-        gameDataSetupService.registerAccount();
         gameDataSetupService.createPlanets();
+        gameDataSetupService.registerAccountWithNation();
 
         metaInitStatusRepository.save(new MetaInitStatus());
 

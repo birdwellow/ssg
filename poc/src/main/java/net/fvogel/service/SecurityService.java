@@ -1,12 +1,10 @@
 package net.fvogel.service;
 
-import java.security.Principal;
 import java.util.HashSet;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import net.fvogel.model.Account;
 import net.fvogel.model.Login;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;

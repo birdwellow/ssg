@@ -58,18 +58,18 @@
     
     
     <build>
-        <resources>
+        <resource>
             <resource>
-                <directory>src/main/resources</directory>
+                <directory>src/main/resource</directory>
             </resource>
             <resource>
                 <directory>../frontend/dist</directory>
             </resource>
-        </resources>
+        </resource>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-resources-plugin</artifactId>
+                <artifactId>maven-resource-plugin</artifactId>
             </plugin>
             <plugin>
                 <groupId>org.springframework.boot</groupId>

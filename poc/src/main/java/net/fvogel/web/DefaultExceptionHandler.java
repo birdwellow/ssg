@@ -1,7 +1,5 @@
 package net.fvogel.web;
 
-import javax.persistence.EntityNotFoundException;
-
 import net.fvogel.exception.ConflictingEntitiesException;
 import net.fvogel.exception.NoEntityExistingException;
 import org.springframework.http.HttpStatus;

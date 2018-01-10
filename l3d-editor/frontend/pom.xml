@@ -48,7 +48,7 @@
                                     <!--<argument>"/frontend/"</argument>-->
                                 </arguments>
                             </configuration>
-                            <phase>generate-resources</phase>
+                            <phase>generate-resource</phase>
                             <goals>
                                 <goal>exec</goal>
                             </goals>
