@@ -13,6 +13,7 @@ import lombok.Data;
 import net.fvogel.model.typing.AtmosphereType;
 import net.fvogel.model.typing.PlanetSurfaceType;
 import net.fvogel.model.typing.PlanetType;
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Data
@@ -20,7 +21,6 @@ public class Planet {
 
     @Id
     @GeneratedValue
-    @JsonIgnore
     Long id;
 
     @JsonIgnore

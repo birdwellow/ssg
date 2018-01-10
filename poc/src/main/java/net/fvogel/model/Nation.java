@@ -34,10 +34,6 @@ public class Nation {
     @NotNull
     int credits;
 
-    @NotNull
-    @NotEmpty
-    String uuid;
-
     @OneToMany
     List<Planet> planets = new ArrayList<>();
 

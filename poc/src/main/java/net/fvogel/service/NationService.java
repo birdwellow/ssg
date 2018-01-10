@@ -1,7 +1,6 @@
 package net.fvogel.service;
 
 import java.util.List;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 import net.fvogel.exception.ConflictingEntitiesException;
@@ -29,6 +28,10 @@ public class NationService {
     @Autowired
     NationRepository nationRepository;
 
+    public Nation getNation(Long id) {
+        return nationRepository.findOne(id);
+    }
+
     public Nation registerNewNation(Nation nationData) {
         Account account = accountService.getCurrentAccount();
 
@@ -48,17 +51,13 @@ public class NationService {
             throw new IllegalStateException("There is no planet left that could be assigned to this new nation");
         }
 
-        String uuid = UUID.randomUUID().toString();
-
         Nation nation = new Nation();
-        nation.setUuid(uuid);
         nation.setCredits(200);
         nation.setName(nationData.getName());
         nation.setAccount(account);
         nation.getPlanets().add(unownedPlanet);
 
         nationRepository.save(nation);
-//        planetRepository.save(unownedPlanet);
 
         return nation;
     }

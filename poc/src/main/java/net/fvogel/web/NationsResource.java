@@ -19,9 +19,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class NationsResource {
 
     @Autowired
-    NationRepository nationRepository;
-
-    @Autowired
     NationService nationService;
 
     @Autowired
@@ -37,15 +34,15 @@ public class NationsResource {
         return account.getNation();
     }
 
-    @RequestMapping(value = "/{uuid}", method = RequestMethod.GET)
-    public Nation getNationByUuid(@PathVariable() String uuid) {
-        return nationRepository.findOneByUuid(uuid);
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public Nation getNationById(@PathVariable() Long id) {
+        return nationService.getNation(id);
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public String createNation(@RequestBody Nation nationData) {
+    public Long createNation(@RequestBody Nation nationData) {
         Nation nation = nationService.registerNewNation(nationData);
-        return nation.getUuid();
+        return nation.getId();
     }
 
 }

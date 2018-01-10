@@ -103,6 +103,8 @@ public class GameDataSetupService {
             planet.setSiliconResources((short)randomizer.getRandomInt(12));
             planet.setTempUpperBound((short) (temperatureBase * 1.3));
             planet.setTempLowerBound((short) (temperatureBase * 0.7));
+            planet.setAtmosphere(randomizer.getRandomEnumConstant(AtmosphereType.class));
+            planet.setSurface(randomizer.getRandomEnumConstant(PlanetSurfaceType.class));
         }
 
         planetRepository.save(planet);
