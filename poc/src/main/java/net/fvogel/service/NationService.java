@@ -54,9 +54,10 @@ public class NationService {
         nation.setCredits(200);
         nation.setName(nationData.getName());
         nation.setAccount(account);
-        nation.getPlanets().add(unownedPlanet);
-
         nationRepository.save(nation);
+
+        unownedPlanet.setNation(nation);
+        planetRepository.save(unownedPlanet);
 
         return nation;
     }

@@ -3,10 +3,12 @@ package net.fvogel.model;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
@@ -16,6 +18,7 @@ import lombok.Data;
 import net.fvogel.model.typing.AtmosphereType;
 import net.fvogel.model.typing.PlanetSurfaceType;
 import net.fvogel.model.typing.PlanetType;
+import net.fvogel.model.typing.ResourceType;
 
 @Entity
 @Data
@@ -40,6 +43,8 @@ public class Planet {
     SolarSystem solarSystem;
 
     @ManyToOne
+    @JoinColumn(name = "nation_id")
+    @JsonIgnore
     Nation nation;
 
     short distance;
@@ -51,5 +56,13 @@ public class Planet {
 
     @OneToMany
     List<Resource> resources = new ArrayList<>();
+
+    public Resource getResource(ResourceType type) {
+        return this.resources
+                .stream()
+                .filter((resource) -> {return type.equals(resource.getType());})
+                .collect(Collectors.toList())
+                .get(0);
+    }
 
 }

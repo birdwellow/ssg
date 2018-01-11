@@ -3,6 +3,7 @@ package net.fvogel.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -33,7 +34,7 @@ public class Nation {
     @NotNull
     int credits;
 
-    @OneToMany
+    @OneToMany(mappedBy = "nation", cascade = CascadeType.ALL)
     List<Planet> planets = new ArrayList<>();
 
     @JsonIgnore
