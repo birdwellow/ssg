@@ -1,5 +1,7 @@
 package net.fvogel.model;
 
+import java.sql.Timestamp;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -19,6 +21,9 @@ public class Resource {
     @GeneratedValue
     @JsonIgnore
     Long id;
+
+    @JsonIgnore
+    Long lastUpdatedAt = System.currentTimeMillis();
 
     ResourceType type;
 

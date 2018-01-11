@@ -1,6 +1,5 @@
 package net.fvogel.model;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -27,9 +26,6 @@ public class Planet {
     @Id
     @GeneratedValue
     Long id;
-
-    @JsonIgnore
-    Timestamp lastUpdateAt = new Timestamp(System.currentTimeMillis());
 
     String name;
 
