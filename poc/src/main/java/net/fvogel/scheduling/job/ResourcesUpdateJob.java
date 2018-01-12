@@ -43,14 +43,4 @@ public class ResourcesUpdateJob implements Job {
         resourceRepository.save(resources);
     }
 
-    @Bean(name = "jobWithSimpleTriggerBean")
-    public JobDetailFactoryBean jobDetailFactoryBean() {
-        return SchedulingConfig.createJobDetail(this.getClass());
-    }
-
-    @Bean(name = "jobWithSimpleTriggerBeanTrigger")
-    public SimpleTriggerFactoryBean simpleTriggerFactoryBean(@Qualifier("jobWithSimpleTriggerBean") JobDetail jobDetail) {
-        return SchedulingConfig.createTrigger(jobDetail, 5000);
-    }
-
 }

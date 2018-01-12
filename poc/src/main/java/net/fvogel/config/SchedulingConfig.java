@@ -1,5 +1,7 @@
 package net.fvogel.config;
 
+import java.util.UUID;
+
 import net.fvogel.scheduling.job.ResourcesUpdateJob;
 import org.quartz.JobDetail;
 import org.quartz.Scheduler;
@@ -10,14 +12,12 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.scheduling.quartz.CronTriggerFactoryBean;
 import org.springframework.scheduling.quartz.JobDetailFactoryBean;
 import org.springframework.scheduling.quartz.SchedulerFactoryBean;
 import org.springframework.scheduling.quartz.SimpleTriggerFactoryBean;
 
 @Configuration
 public class SchedulingConfig {
-
 
     @Bean
     public JobFactory jobFactory(ApplicationContext applicationContext) {
@@ -28,7 +28,7 @@ public class SchedulingConfig {
 
     @Bean
     public Scheduler schedulerFactoryBean(JobFactory jobFactory,
-            @Qualifier("sampleJobTrigger") Trigger sampleJobTrigger) throws Exception {
+            @Qualifier("continuousJobTrigger") Trigger jobTrigger) throws Exception {
 
         SchedulerFactoryBean factory = new SchedulerFactoryBean();
         factory.setJobFactory(jobFactory);
@@ -36,44 +36,28 @@ public class SchedulingConfig {
 
         Scheduler scheduler = factory.getScheduler();
         scheduler.setJobFactory(jobFactory);
-        scheduler.scheduleJob((JobDetail) sampleJobTrigger.getJobDataMap().get("jobDetail"), sampleJobTrigger);
+        scheduler.scheduleJob((JobDetail) jobTrigger.getJobDataMap().get("jobDetail"), jobTrigger);
 
         scheduler.start();
         return scheduler;
     }
 
     @Bean
-    public JobDetailFactoryBean sampleJobDetail() {
-        return createJobDetail(ResourcesUpdateJob.class);
-    }
-
-    @Bean(name = "sampleJobTrigger")
-    public SimpleTriggerFactoryBean sampleJobTrigger(@Qualifier("sampleJobDetail") JobDetail jobDetail) {
-        return createTrigger(jobDetail, 5000);
-    }
-
-    public static JobDetailFactoryBean createJobDetail(Class jobClass) {
+    @Qualifier("resourceJobDetail")
+    public JobDetailFactoryBean resourceJobDetailFactoryBean() {
         JobDetailFactoryBean factoryBean = new JobDetailFactoryBean();
-        factoryBean.setJobClass(jobClass);
+        factoryBean.setJobClass(ResourcesUpdateJob.class);
         return factoryBean;
     }
 
-    public static SimpleTriggerFactoryBean createTrigger(JobDetail jobDetail, long pollFrequencyMs) {
+    @Bean(name = "continuousJobTrigger")
+    public SimpleTriggerFactoryBean continuousJobTrigger(@Qualifier("resourceJobDetail") JobDetail jobDetail) {
         SimpleTriggerFactoryBean factoryBean = new SimpleTriggerFactoryBean();
         factoryBean.setJobDetail(jobDetail);
         factoryBean.setStartDelay(0L);
-        factoryBean.setRepeatInterval(pollFrequencyMs);
+        factoryBean.setRepeatInterval(5000);
         factoryBean.setRepeatCount(SimpleTrigger.REPEAT_INDEFINITELY);
         factoryBean.setMisfireInstruction(SimpleTrigger.MISFIRE_INSTRUCTION_RESCHEDULE_NEXT_WITH_REMAINING_COUNT);
-        return factoryBean;
-    }
-
-    // Use this method for creating cron triggers instead of simple triggers:
-    private static CronTriggerFactoryBean createCronTrigger(JobDetail jobDetail, String cronExpression) {
-        CronTriggerFactoryBean factoryBean = new CronTriggerFactoryBean();
-        factoryBean.setJobDetail(jobDetail);
-        factoryBean.setCronExpression(cronExpression);
-        factoryBean.setMisfireInstruction(SimpleTrigger.MISFIRE_INSTRUCTION_FIRE_NOW);
         return factoryBean;
     }
 
