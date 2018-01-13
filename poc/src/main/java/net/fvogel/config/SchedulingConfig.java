@@ -1,8 +1,7 @@
 package net.fvogel.config;
 
-import java.util.UUID;
-
 import net.fvogel.scheduling.job.ResourcesUpdateJob;
+import org.quartz.Job;
 import org.quartz.JobDetail;
 import org.quartz.Scheduler;
 import org.quartz.SimpleTrigger;
@@ -42,14 +41,6 @@ public class SchedulingConfig {
         return scheduler;
     }
 
-    @Bean
-    @Qualifier("resourceJobDetail")
-    public JobDetailFactoryBean resourceJobDetailFactoryBean() {
-        JobDetailFactoryBean factoryBean = new JobDetailFactoryBean();
-        factoryBean.setJobClass(ResourcesUpdateJob.class);
-        return factoryBean;
-    }
-
     @Bean(name = "continuousJobTrigger")
     public SimpleTriggerFactoryBean continuousJobTrigger(@Qualifier("resourceJobDetail") JobDetail jobDetail) {
         SimpleTriggerFactoryBean factoryBean = new SimpleTriggerFactoryBean();
@@ -58,6 +49,22 @@ public class SchedulingConfig {
         factoryBean.setRepeatInterval(5000);
         factoryBean.setRepeatCount(SimpleTrigger.REPEAT_INDEFINITELY);
         factoryBean.setMisfireInstruction(SimpleTrigger.MISFIRE_INSTRUCTION_RESCHEDULE_NEXT_WITH_REMAINING_COUNT);
+        return factoryBean;
+    }
+
+    @Bean
+    @Qualifier("resourceJobDetail")
+    public JobDetailFactoryBean resourceJobDetailFactoryBean() {
+        JobDetailFactoryBean factoryBean = new JobDetailFactoryBean();
+        factoryBean.setJobClass(ResourcesUpdateJob.class);
+        return factoryBean;
+    }
+
+    @Bean
+    @Qualifier("jobDetailFactoryBean")
+    public JobDetailFactoryBean jobDetailFactoryBean() {
+        JobDetailFactoryBean factoryBean = new JobDetailFactoryBean();
+        factoryBean.setJobClass(Job.class);
         return factoryBean;
     }
 
