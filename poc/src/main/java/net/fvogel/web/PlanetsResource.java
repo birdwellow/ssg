@@ -16,6 +16,7 @@ import net.fvogel.repo.NationRepository;
 import net.fvogel.repo.PlanetRepository;
 import net.fvogel.repo.ResourceRepository;
 import net.fvogel.scheduling.job.BuildTask;
+import net.fvogel.scheduling.job.Task;
 import net.fvogel.scheduling.job.TaskSchedulingService;
 import net.fvogel.service.AccountService;
 import org.quartz.SchedulerException;
@@ -115,11 +116,11 @@ public class PlanetsResource {
         nationRepository.save(nation);
         resourceRepository.save(resource);
 
-
-        Map<String, Object> parameters = new HashMap<>();
-        parameters.put("planetId", planetId);
-
-        taskScheduler.schedule(BuildTask.class, parameters);
+        taskScheduler
+                .plan(BuildTask.class)
+                .withDelayMilliseconds(5000)
+                .withParameter("planetId", planetId)
+        .fire();
 
     }
 
