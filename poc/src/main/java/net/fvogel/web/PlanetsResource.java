@@ -15,8 +15,7 @@ import net.fvogel.model.typing.ResourceType;
 import net.fvogel.repo.NationRepository;
 import net.fvogel.repo.PlanetRepository;
 import net.fvogel.repo.ResourceRepository;
-import net.fvogel.scheduling.job.BuildJob;
-import net.fvogel.scheduling.job.Task;
+import net.fvogel.scheduling.job.BuildTask;
 import net.fvogel.scheduling.job.TaskSchedulingService;
 import net.fvogel.service.AccountService;
 import org.quartz.SchedulerException;
@@ -27,8 +26,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import static org.quartz.JobBuilder.newJob;
 
 @RestController
 @RequestMapping("/planets")
@@ -119,13 +116,10 @@ public class PlanetsResource {
         resourceRepository.save(resource);
 
 
-
         Map<String, Object> parameters = new HashMap<>();
         parameters.put("planetId", planetId);
 
-        Task task = new Task(BuildJob.class, parameters);
-
-        taskScheduler.schedule(task);
+        taskScheduler.schedule(BuildTask.class, parameters);
 
     }
 

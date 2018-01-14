@@ -1,26 +1,19 @@
 package net.fvogel.scheduling.job;
 
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-
 import org.quartz.Job;
+import org.quartz.JobExecutionContext;
+import org.quartz.JobExecutionException;
 
-public class Task<T extends Job> {
+public abstract class Task implements Job {
 
-    private Class<T> clazz;
-    private Map<String, Object> parameters = new ConcurrentHashMap<>();
-
-    public Task(Class<T> clazz, Map<String, Object> parameters) {
-        this.clazz = clazz;
-        this.parameters = parameters;
+    public final void execute(JobExecutionContext context) throws JobExecutionException {
+        // TODO: Allow Task implementations to annotate one method for execution and
+        //       inject corresponding parameters (maybe also annotated with a name)
+        this.execute();
     }
 
-    public Class<T> getJobClass() {
-        return clazz;
-    }
+    public abstract void execute(Object... parameters);
 
-    public Map<String, Object> getParameters() {
-        return parameters;
-    }
+
 
 }

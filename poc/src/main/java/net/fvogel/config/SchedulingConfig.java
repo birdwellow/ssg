@@ -1,7 +1,6 @@
 package net.fvogel.config;
 
 import net.fvogel.scheduling.job.ResourcesUpdateJob;
-import org.quartz.Job;
 import org.quartz.JobDetail;
 import org.quartz.Scheduler;
 import org.quartz.SimpleTrigger;
@@ -57,14 +56,6 @@ public class SchedulingConfig {
     public JobDetailFactoryBean resourceJobDetailFactoryBean() {
         JobDetailFactoryBean factoryBean = new JobDetailFactoryBean();
         factoryBean.setJobClass(ResourcesUpdateJob.class);
-        return factoryBean;
-    }
-
-    @Bean
-    @Qualifier("jobDetailFactoryBean")
-    public JobDetailFactoryBean jobDetailFactoryBean() {
-        JobDetailFactoryBean factoryBean = new JobDetailFactoryBean();
-        factoryBean.setJobClass(Job.class);
         return factoryBean;
     }
 
