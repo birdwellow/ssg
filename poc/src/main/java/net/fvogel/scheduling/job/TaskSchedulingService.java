@@ -48,6 +48,7 @@ public class TaskSchedulingService {
         public TaskBuilder withParameter(String name, Object parameter) {
             if (parameter != null) {
                 this.parameters.put(name, parameter);
+                this.parameters.put(parameter.getClass().getSimpleName(), parameter);
             }
             return this;
         }

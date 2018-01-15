@@ -8,10 +8,20 @@ public class BuildTask extends Task {
     @Autowired
     PlanetRepository planetRepository;
 
-    @Override
-    public void execute(Object... parameters) {
+    @TaskParameter("planetId")
+    Long planetId;
 
-        System.out.println("execute with dependency: " + planetRepository);
+    @TaskParameter
+    Integer someInt;
+
+    Long anotherId;
+
+    @Override
+    public void run() {
+        System.out.println(String.format("execute with dependency: %s and planetId: %d, someInt: %d",
+                planetRepository,
+                planetId,
+                someInt));
 
     }
 
