@@ -1,8 +1,6 @@
 package net.fvogel.web;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -11,12 +9,14 @@ import net.fvogel.model.Account;
 import net.fvogel.model.Nation;
 import net.fvogel.model.Planet;
 import net.fvogel.model.Resource;
+import net.fvogel.model.typing.BuildingType;
+import net.fvogel.model.Buildings;
 import net.fvogel.model.typing.ResourceType;
+import net.fvogel.repo.BuildingsRepository;
 import net.fvogel.repo.NationRepository;
 import net.fvogel.repo.PlanetRepository;
 import net.fvogel.repo.ResourceRepository;
 import net.fvogel.scheduling.job.BuildTask;
-import net.fvogel.scheduling.job.Task;
 import net.fvogel.scheduling.job.TaskSchedulingService;
 import net.fvogel.service.AccountService;
 import org.quartz.SchedulerException;
@@ -43,6 +43,9 @@ public class PlanetsResource {
 
     @Autowired
     ResourceRepository resourceRepository;
+
+    @Autowired
+    BuildingsRepository buildingsRepository;
 
     @Autowired
     TaskSchedulingService taskScheduler;
@@ -104,16 +107,20 @@ public class PlanetsResource {
         if (nation.getCredits() - price < 0) {
             throw new IllegalArgumentException("Nation does not have enough credits");
         }
-        if (resource.getMineCapacity() < resource.getMineCount() + amount) {
+        Buildings mines = getMines(resource);
+        int mineCount = mines.getCount();
+        if (resource.getMineCapacity() < mineCount + amount) {
             throw new IllegalArgumentException("Mine capacity on this planet exceeded");
         }
 
         // TODO: Instead of simply building, add energy supply and issue timer
 
         nation.setCredits(nation.getCredits() - price);
-        resource.setMineCount(resource.getMineCount() + amount);
+
+        mines.setCount(mines.getCount() + amount);
 
         nationRepository.save(nation);
+        buildingsRepository.save(mines);
         resourceRepository.save(resource);
 
         taskScheduler
@@ -122,6 +129,20 @@ public class PlanetsResource {
                 .withParameter("planetId", planetId)
         .fire();
 
+    }
+
+    Buildings getMines(Resource resource) {
+        if (resource.getMines() != null) {
+            return resource.getMines();
+        }
+        Buildings mines = new Buildings();
+        BuildingType type = BuildingType.valueOf(resource.getType().name() + "_MINE");
+        mines.setPlanet(resource.getPlanet());
+        mines.setType(type);
+        mines.setCount(0);
+        mines.setBuildingCount(0);
+        resource.setMines(mines);
+        return mines;
     }
 
 }

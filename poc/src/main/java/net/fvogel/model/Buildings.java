@@ -4,45 +4,38 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import net.fvogel.model.typing.ResourceType;
+import net.fvogel.model.typing.BuildingType;
 
 @Entity
 @Data
 @NoArgsConstructor
-public class Resource {
+public class Buildings {
 
     @Id
     @GeneratedValue
-    @JsonIgnore
     Long id;
 
     @JsonIgnore
     Long lastUpdatedAt = System.currentTimeMillis();
 
-    ResourceType type;
+    BuildingType type;
 
-    @ManyToOne
+    Integer count;
+    Integer buildingCount;
+
+    Long nextBuildingFinished;
+
+    @ManyToOne(cascade = CascadeType.ALL)
     @JsonIgnore
     Planet planet;
 
-    Double stock;
-
     @JsonIgnore
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "mine_buildings_id")
-    Buildings mines;
-
-    Integer mineCapacity;
-
-    public Resource(ResourceType resourceType) {
-        this.type = resourceType;
-    }
-
+    @OneToOne(mappedBy = "mines", cascade = CascadeType.ALL)
+    Resource resource;
 }

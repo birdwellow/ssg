@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -50,8 +51,11 @@ public class Planet {
     short tempLowerBound;
     short tempUpperBound;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     List<Resource> resources = new ArrayList<>();
+
+    @OneToMany(cascade = CascadeType.ALL)
+    List<Buildings> buildings = new ArrayList<>();
 
     public Resource getResource(ResourceType type) {
         return this.resources

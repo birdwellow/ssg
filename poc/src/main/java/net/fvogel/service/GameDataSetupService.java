@@ -131,7 +131,6 @@ public class GameDataSetupService {
         for (ResourceType resourceType : ResourceType.values()) {
             Resource resource = new Resource(resourceType);
             resource.setMineCapacity(randomizer.getRandomInt(24));
-            resource.setMineCount(0);
             resource.setPlanet(planet);
             resource.setStock(0D);
             resourceList.add(resource);

@@ -11,17 +11,11 @@ public class BuildTask extends Task {
     @TaskParameter("planetId")
     Long planetId;
 
-    @TaskParameter
-    Integer someInt;
-
-    Long anotherId;
-
     @Override
     public void run() {
-        System.out.println(String.format("execute with dependency: %s and planetId: %d, someInt: %d",
+        System.out.println(String.format("execute with dependency: %s and planetId: %d",
                 planetRepository,
-                planetId,
-                someInt));
+                planetId));
 
     }
 

@@ -3,6 +3,7 @@ package net.fvogel.scheduling.job;
 import java.util.List;
 
 import net.fvogel.model.Resource;
+import net.fvogel.model.Buildings;
 import net.fvogel.repo.ResourceRepository;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
@@ -27,8 +28,9 @@ public class ResourcesUpdateJob implements Job {
             Long now = System.currentTimeMillis();
             Long diff = now - resource.getLastUpdatedAt();
             double stock = resource.getStock();
-            int mines = resource.getMineCount();
-            stock += mines * diff * resourceIncrementPerMillisecond;
+            Buildings mines = resource.getMines();
+            int minesCount = mines == null ? 0 : mines.getCount();
+            stock += minesCount * diff * resourceIncrementPerMillisecond;
             resource.setStock(stock);
             resource.setLastUpdatedAt(now);
         }
